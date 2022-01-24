@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template
 from datetime import datetime
-import subprocess as sp
 
 views = Blueprint('views', __name__)
 
