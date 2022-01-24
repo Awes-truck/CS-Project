@@ -9,10 +9,11 @@ body {
 
 .navbar{
   	position: sticky !important;
-  	top:0 !important;
+  	top: 0 !important;
   	padding: 0;
 	transition: all 0.4s;
 	z-index: 98 !important;
+	background
 }
 
 .navbar-nav{
@@ -28,6 +29,11 @@ body {
 
 .navbar-brand{
 	margin-inline-start: 5% !important;
+}
+
+.navbar-brand img{
+	height: 80px;
+	width: auto;
 }
 
 #copyright {
