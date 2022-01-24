@@ -63,6 +63,10 @@ a {
     	color: #fff !important;
 		font-size: 2vw !important;
 	}
+
+	#banner .banner-text{
+		font-size: 5vw !important;
+	}
 }
 #copyright {
   	text-align: center;
