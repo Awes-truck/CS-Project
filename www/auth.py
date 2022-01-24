@@ -4,7 +4,7 @@ from datetime import datetime
 auth = Blueprint('auth', __name__)
 
 
-@auth.route('/login',  datetime=str(datetime.now().year)methods=['GET', 'POST'])
+@auth.route('/login', methods=['GET', 'POST'])
 def login():
     return render_template("login.html",  datetime=str(datetime.now().year))
 
