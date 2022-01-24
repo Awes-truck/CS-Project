@@ -10,7 +10,7 @@ def login():
 
 
 @auth.route('/register', methods=['GET', 'POST'])
-def signup():
+def register():
     if request.method == 'POST':
         email = request.form.get('email')
         fullName = request.form.get('fullName')
