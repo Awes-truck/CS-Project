@@ -3,7 +3,32 @@ html {
 	min-width:100%;
 }
 
+body {
+	background-color: gray
+}
 
+.navbar{
+  	position: sticky !important;
+  	top:0 !important;
+  	padding: 0;
+	transition: all 0.4s;
+	z-index: 98 !important;
+}
+
+.navbar-nav{
+	font-size: 1.5vw;
+	margin-left: 5% !important;
+}
+
+/* THESE NAV ITEMS ARE DEFAULT AS SOON AS YOU ENTER THE WEBSITE*/
+.navbar-nav .nav-item.nav-link{
+	transition: all 0.4s;
+	margin-left: 10% !important;
+}
+
+.navbar-brand{
+	margin-inline-start: 5% !important;
+}
 
 #copyright {
   	text-align: center;
