@@ -22,18 +22,13 @@
 
     <link rel="stylesheet" href="./static/main.css" type="text/css">
 
-    <title>{% block title %}J. Molyneux{% endblock %}</title>
-    <link rel="icon" type="png" href="./static/img/icon.png">
+    <title>{% block title %}WGCCC{% endblock %}</title>
+    <link rel="icon" type="ico" href="./static/img/icon.ico">
 
-    <div id="loader-wrapper">
-      <div id="loader"></div>
-        <div class="loader-section section-left"></div>
-        <div class="loader-section section-right"></div>
-    </div>
   </head>
 
   <body>
-    <div id="home"></div>
+
     <nav class="navbar navbar-expand-lg navbar-dark">
       <button
         class="navbar-toggler"
@@ -43,7 +38,7 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" style="font-size: 3vw;" href="/">J Molyneux:~$ <span class="terminal">|</span></a>
+      <a class="navbar-brand" style="font-size: 3vw;" href="/">J Molyneux:~$ </a>
 
       <div class="collapse navbar-collapse" id="navbar">
         <div class="navbar-nav">
@@ -54,29 +49,10 @@
         </div>
       </div>
     </nav>
-    <button
-      type="button"
-      class="btn btn-lg"
-      id="back-to-top"
-    >
-      <span class="bi bi-arrow-up"></span>
-    </button>
+
     <div class="main_container">
-      <section id="introduction">
-          <h5>Hi there,</h5>
-          <h1>I'm Josh</h1>
-          <h2>Please hire me. I'm begging you</h2>
-      </section>
-      <section id="projects">
-          <h2>PROJECTS</h2>
-      </section>
-      <section id="about">
-          <h2>ABOUT ME</h2>
-      </section>
-      <section id="contact">
-          <h2>GET IN TOUCH</h2>
-      </section>
     </div>
+
     <section id="footer">
       <div id="copyright">
         <div data-inviewport="scale-in">
@@ -84,31 +60,7 @@
         </div>
       </div>
     </section>
-    <div orientation='left' class='side_bar'>
-      <ul class='socials'>
-        <li><a href="https://github.com/Awes-truck" target="_blank">
-          <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="#4AF626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github">
-            <title>GitHub</title>
-            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-          </svg>
-        </a></li>
-        <li><a href="https://instagram.com/joshuamoly" target="_blank">
-          <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="#4AF626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram">
-            <title>Instagram</title>
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-          </svg>
-        </a></li>
-        <li><a href="https://www.linkedin.com/in/joshua-molyneux-8735705b" target="_blank">
-          <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="#4AF626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram">
-            <title>LinkedIn</title>
-            <rect x="2" y="9" width="4" height="12"></rect>
-            <circle cx="4" cy="4" r="2"></circle>
-            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-          </svg>
-        </a></li>
-      </ul>
-    </div>
+
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -130,5 +82,6 @@
       crossorigin="anonymous"
     ></script>
     <script type="text/javascript" src="./static/js/main.js"></script>
+
   </body>
 </html>
