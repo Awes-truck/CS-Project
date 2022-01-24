@@ -16,24 +16,26 @@ a {
     background-image: url("img/topbanner.jpg");
     background-repeat: no-repeat;
     background-position: center;
+	padding-bottom: 10px
 }
 #banner .banner-text{
 	font-size: 3vw;
 	text-decoration: none;
 	color: white;
 	-webkit-text-stroke: 0.5px black;
+	margin-inline-start: 5% !important;
 }
 
-.banner-text img{
-	height: 80px;
-	width: auto;
+.logo {
+    width: auto;
+    height: 15%;
+    padding: 10px;
 }
 
 .navbar{
   	position: sticky !important;
   	top: 0 !important;
   	padding: 0;
-	background: darkgreen;
 }
 
 .navbar .nav-link.active {
@@ -51,11 +53,17 @@ a {
 	margin-left: 10% !important;
 }
 
-.navbar-brand{
-	margin-inline-start: 5% !important;
-	-webkit-text-stroke: 0.5px black;
+.navbar-toggler{
+	margin-left: 1% !important;
 }
 
+@media (max-width: 991.98px) {
+	.navbar-nav .nav-item.nav-link {
+		margin-left: 5% !important;
+    	color: #fff !important;
+		font-size: 2vw !important;
+	}
+}
 #copyright {
   	text-align: center;
 	font-size: 1vw;
