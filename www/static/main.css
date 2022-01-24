@@ -4,15 +4,40 @@ html {
 }
 
 body {
-	background-color: gray
+	background-color: white
+}
+
+a {
+	color: inherit;
+}
+
+#banner {
+	background-color: darkgreen;
+    background-image: url("img/topbanner.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+#banner .banner-text{
+	font-size: 3vw;
+	text-decoration: none;
+	color: white;
+	-webkit-text-stroke: 0.5px black;
+}
+
+.banner-text img{
+	height: 80px;
+	width: auto;
 }
 
 .navbar{
   	position: sticky !important;
   	top: 0 !important;
   	padding: 0;
-	transition: all 0.4s;
-	z-index: 98 !important;
+	background: darkgreen;
+}
+
+.navbar .nav-link.active {
+    color: #fff !important;
 }
 
 .navbar-nav{
@@ -28,11 +53,7 @@ body {
 
 .navbar-brand{
 	margin-inline-start: 5% !important;
-}
-
-.navbar-brand img{
-	height: 80px;
-	width: auto;
+	-webkit-text-stroke: 0.5px black;
 }
 
 #copyright {
