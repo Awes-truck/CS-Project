@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <link rel="stylesheet" href="./static/fonts.css" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="./static/main.css" type="text/css">
+
+    <title>{% block title %}J. Molyneux{% endblock %}</title>
+    <link rel="icon" type="png" href="./static/img/icon.png">
+
+    <div id="loader-wrapper">
+      <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+  </head>
+
+  <body>
+    <div id="home"></div>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbar"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" style="font-size: 3vw;" href="/">J Molyneux:~$ <span class="terminal">|</span></a>
+
+      <div class="collapse navbar-collapse" id="navbar">
+        <div class="navbar-nav">
+          <!--<a class="nav-item nav-link home active_id" href="#home">Home</a>-->
+          <a class="nav-item nav-link projects" href="#projects">Projects</a>
+          <a class="nav-item nav-link about" href="#about">About</a>
+          <a class="nav-item nav-link contact" href="#contact">Contact</a>
+        </div>
+      </div>
+    </nav>
+    <button
+      type="button"
+      class="btn btn-lg"
+      id="back-to-top"
+    >
+      <span class="bi bi-arrow-up"></span>
+    </button>
+    <div class="main_container">
+      <section id="introduction">
+          <h5>Hi there,</h5>
+          <h1>I'm Josh</h1>
+          <h2>Please hire me. I'm begging you</h2>
+      </section>
+      <section id="projects">
+          <h2>PROJECTS</h2>
+      </section>
+      <section id="about">
+          <h2>ABOUT ME</h2>
+      </section>
+      <section id="contact">
+          <h2>GET IN TOUCH</h2>
+      </section>
+    </div>
+    <section id="footer">
+      <div id="copyright">
+        <div data-inviewport="scale-in">
+            <p class="text-light">Built by Joshua Molyneux &copy; {{datetime}} | Powered by Python <img class="python-logo" src="./static/img/Python-logo.svg"></p>
+        </div>
+      </div>
+    </section>
+    <div orientation='left' class='side_bar'>
+      <ul class='socials'>
+        <li><a href="https://github.com/Awes-truck" target="_blank">
+          <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="#4AF626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github">
+            <title>GitHub</title>
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+          </svg>
+        </a></li>
+        <li><a href="https://instagram.com/joshuamoly" target="_blank">
+          <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="#4AF626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram">
+            <title>Instagram</title>
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+        </a></li>
+        <li><a href="https://www.linkedin.com/in/joshua-molyneux-8735705b" target="_blank">
+          <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="#4AF626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram">
+            <title>LinkedIn</title>
+            <rect x="2" y="9" width="4" height="12"></rect>
+            <circle cx="4" cy="4" r="2"></circle>
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+          </svg>
+        </a></li>
+      </ul>
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script type="text/javascript" src="./static/js/main.js"></script>
+  </body>
+</html>

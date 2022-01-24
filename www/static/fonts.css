@@ -1,0 +1,9 @@
+@font-face {
+    font-family:"Elixia";
+    src: url(./font/ELIXIA.ttf) format("truetype");
+}
+
+@font-face {
+    font-family:"FluxRegular";
+    src: url(./font/Flux_Regular.otf) format("opentype");
+}
