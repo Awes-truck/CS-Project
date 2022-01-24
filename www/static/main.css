@@ -65,7 +65,13 @@ a {
 	}
 
 	#banner .banner-text{
-		font-size: 5vw !important;
+		font-size: 4vw !important;
+	}
+
+	.logo {
+	    width: auto;
+	    height: 10%;
+	    padding: 10px;
 	}
 }
 #copyright {
