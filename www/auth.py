@@ -11,10 +11,10 @@ def login():
 
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
-    if request.method == 'POST':
-        email = request.form.get('email')
-        fullName = request.form.get('fullName')
-        password = request.form.get('password')
-        passwordConfirm = request.form.get('passwordConfirm')
+    # if request.method == 'POST':
+    #     email = request.form.get('email')
+    #     fullName = request.form.get('fullName')
+    #     password = request.form.get('password')
+    #     passwordConfirm = request.form.get('passwordConfirm')
 
         return render_template("register.html",  datetime=str(datetime.now().year))
