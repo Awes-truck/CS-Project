@@ -2,3 +2,15 @@ html {
 	scroll-behavior: smooth;
 	min-width:100%;
 }
+
+
+
+#copyright {
+  	text-align: center;
+	font-size: 1vw;
+}
+
+#copyright img.python-logo{
+	height: 1vw;
+	width: auto;
+}
