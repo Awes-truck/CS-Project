@@ -11,7 +11,7 @@ def root():
 
 @views.route('/news')
 def home():
-     return render_template("news.html", datetime=str(datetime.now().year))
+    return render_template("news.html", datetime=str(datetime.now().year))
 
 
 # @views.route('/index')
