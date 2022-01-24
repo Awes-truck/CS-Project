@@ -9,11 +9,11 @@ def root():
     return render_template("home.html", datetime=str(datetime.now().year))
 
 
-# @views.route('/home')
-# def home():
-#     return render_template("home.html", datetime=str(datetime.now().year))
-#
-#
+@views.route('/news')
+def home():
+     return render_template("news.html", datetime=str(datetime.now().year))
+
+
 # @views.route('/index')
 # def index():
 #     return render_template("home.html", datetime=str(datetime.now().year))
