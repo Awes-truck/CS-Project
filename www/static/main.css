@@ -53,6 +53,10 @@ a {
 	margin-left: 10% !important;
 }
 
+.navbar-nav.ml-auto{
+	padding-right: 10px;
+}
+
 .navbar-toggler{
 	margin-left: 1% !important;
 }
