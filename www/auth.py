@@ -6,6 +6,10 @@ auth = Blueprint('auth', __name__)
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
+    if request.method == 'POST':
+        email = request.get('email')
+        password = request.get('password')
+
     return render_template("login.html",  datetime=str(datetime.now().year))
 
 
