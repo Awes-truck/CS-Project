@@ -11,21 +11,22 @@ def login():
 
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
+    postal_keys = [
+        'street_number',
+        'route',
+        'postal_town',
+        'administrative_area_level_2',
+        'postal_code'
+    ]
+    full_address_list = []
+    separator = ', '
+
     if request.method == 'POST':
         email = request.form.get('email')
         full_name = request.form.get('full_name')
         password = request.form.get('password')
         password_confirm = request.form.get('password_confirm')
-        postal_list = [
-            'street_number',
-            'route',
-            'postal_town',
-            'administrative_area_level_2',
-            'postal_code'
-        ]
-        full_address_list = []
-        separator = ', '
-        for i in postal_list:
+        for i in postal_keys:
             full_address_list.append(request.form.get(i))
 
         full_address = separator.join(full_address_list)
