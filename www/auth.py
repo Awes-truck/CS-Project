@@ -23,7 +23,8 @@ def register():
 
     if request.method == 'POST':
         email = request.form.get('email')
-        full_name = request.form.get('full_name')
+        first_name = request.form.get('first_name')
+        family_name = request.form.get('family_name')
         password = request.form.get('password')
         password_confirm = request.form.get('password_confirm')
         for i in postal_keys:
@@ -33,8 +34,10 @@ def register():
 
         if len(email) < 4:
             flash('Email must be greater 3 characters', category='error')
-        elif len(full_name) < 4:
-            flash('Full Name must be greater than 3 characters', category='error')
+        elif len(first_name) < 4:
+            flash('First Name must be greater than 3 characters', category='error')
+        elif len(family_name) < 4:
+            flash('Family Name must be greater than 3 characters', category='error')
         elif password != password_confirm:
             flash('Passwords do not match', category='error')
         elif len(password) < 8:
