@@ -13,9 +13,9 @@ def login():
 def register():
     if request.method == 'POST':
         email = request.form.get('email')
-        full_name = request.form.get('fullName')
+        full_name = request.form.get('full_name')
         password = request.form.get('password')
-        password_confirm = request.form.get('passwordConfirm')
+        password_confirm = request.form.get('password_confirm')
         postal_list = [
             'street_number',
             'route',
