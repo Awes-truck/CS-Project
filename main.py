@@ -8,7 +8,7 @@ app.config['SECRET_KEY'] = 'sgeswgw43twsfwq3fafsdfq3'
 host = 'fdb33.awardspace.net'
 port = 3306
 user = '4031935_wgcc'
-password = ''
+password = 'y6BhCl?28xN:9_Zx'
 
 connect = pymysql.connect(
     host=host,
