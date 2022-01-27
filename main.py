@@ -5,7 +5,7 @@ import pymysql
 app = create_app()
 
 app.config['SECRET_KEY'] = 'sgeswgw43twsfwq3fafsdfq3'
-host = '86.173.55.216'
+host = 'localhost'
 port = 3306
 user = 'root'
 password = ''
