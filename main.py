@@ -5,10 +5,10 @@ import pymysql
 app = create_app()
 
 app.config['SECRET_KEY'] = 'sgeswgw43twsfwq3fafsdfq3'
-host = 'fdb33.awardspace.net'
+host = '86.173.55.216'
 port = 3306
-user = '4031935_wgcc'
-password = 'y6BhCl?28xN:9_Zx'
+user = 'root'
+password = ''
 
 connect = pymysql.connect(
     host=host,
