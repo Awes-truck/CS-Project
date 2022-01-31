@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, flash
 from datetime import datetime
+import pymysql
 
 auth = Blueprint('auth', __name__)
 
