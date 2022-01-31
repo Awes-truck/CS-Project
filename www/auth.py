@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, current_app as app
+from flask import Blueprint, render_template, redirect, url_for, request, flash, current_app as app
 from datetime import datetime
 # import pymysql
 from .__init__ import sql_connect
@@ -68,5 +68,6 @@ def register():
             connect.commit()
             connect.close()
             flash('Account successfully created!', category='success')
+            return redirect(url_for('views.home'))
 
     return render_template("register.html",  datetime=str(datetime.now().year))

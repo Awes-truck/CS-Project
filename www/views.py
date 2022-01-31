@@ -5,12 +5,12 @@ views = Blueprint('views', __name__)
 
 
 @views.route('/')
-def root():
+def home():
     return render_template("home.html", datetime=str(datetime.now().year))
 
 
 @views.route('/news')
-def home():
+def news():
     return render_template("news.html", datetime=str(datetime.now().year))
 
 # @views.route('/index')
