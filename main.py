@@ -7,7 +7,7 @@ app = create_app()
 app.config['SECRET_KEY'] = 'sgeswgw43twsfwq3fafsdfq3'
 LOCAL_SQL_MODE = False
 
-if socket.gethostbyname("localhost"):
+if socket.gethostbyname("127.0.0.1"):
     print("Localhosting enabled!")
     LOCAL_SQL_MODE = True
 
