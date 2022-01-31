@@ -1,17 +1,10 @@
 from www import create_app
 # import mysql.connector
 import pymysql
-import socket
 
 app = create_app()
 app.config['SECRET_KEY'] = 'sgeswgw43twsfwq3fafsdfq3'
 LOCAL_SQL_MODE = False
-
-if socket.getfqdn():  # check if localhost
-    print("Connected to localhost")
-    LOCAL_SQL_MODE = True
-elif socket.getfqdn("project.joshmolyneux.co.uk"):
-    print("Connected to external server")
 
 
 def setup_database():
@@ -38,7 +31,7 @@ def setup_database():
     new_db.close()
 
 
-if LOCAL_SQL_MODE:
+if not LOCAL_SQL_MODE:
     host = 'localhost'
     port = 3306
     user = 'root'
