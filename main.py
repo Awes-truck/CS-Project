@@ -1,10 +1,18 @@
 from www import create_app
 # import mysql.connector
 import pymysql
+from flask import request
+from urllib.parse import urlparse
 
 app = create_app()
 app.config['SECRET_KEY'] = 'sgeswgw43twsfwq3fafsdfq3'
 LOCAL_SQL_MODE = False
+
+
+@app.before_first_request
+def before_first_request_func():
+    o = urlparse(request.base_url)
+    print(o.hostname)
 
 
 def setup_database():
