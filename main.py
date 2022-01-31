@@ -31,20 +31,20 @@ def setup_database():
     new_db.close()
 
 
-if not LOCAL_SQL_MODE:
-    host = 'localhost'
-    port = 3306
-    user = 'root'
-    password = ''
-
-    connect = pymysql.connect(
-        host=host,
-        port=port,
-        user=user,
-        password=password,
-    )
-
-    setup_database()
+# if not LOCAL_SQL_MODE:
+#     host = 'localhost'
+#     port = 3306
+#     user = 'root'
+#     password = ''
+#
+#     connect = pymysql.connect(
+#         host=host,
+#         port=port,
+#         user=user,
+#         password=password,
+#     )
+#
+#     setup_database()
 
 
 if __name__ == '__main__':
