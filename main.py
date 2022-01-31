@@ -8,6 +8,17 @@ app.config['SECRET_KEY'] = 'sgeswgw43twsfwq3fafsdfq3'
 LOCAL_SQL_MODE = False
 
 
+def sql_connect(host, port, user, password, database):
+    connect = pymysql.connect(
+        host=host,
+        port=port,
+        user=user,
+        password=password,
+        database=database
+    )
+    return connect
+
+
 @app.before_first_request
 def before_first_request_func():
     global LOCAL_SQL_MODE
@@ -15,30 +26,14 @@ def before_first_request_func():
     hostname = url.hostname
     print("Connected to %s" % hostname)
     if hostname == "localhost":
-        sql_host = hostname
-        sql_port = 3306
-        sql_user = 'root'
-        sql_password = ''
-
-        connect = pymysql.connect(
-            host=sql_host,
-            port=sql_port,
-            user=sql_user,
-            password=sql_password,
-        )
+        connect = sql_connect('localhost', 3306, 'root', '', '')
 
         cursor = connect.cursor()
         cursor.execute("CREATE DATABASE IF NOT EXISTS wgccc")
         connect.commit()
         connect.close()
 
-        connect = pymysql.connect(
-            host=sql_host,
-            port=sql_port,
-            user=sql_user,
-            password=sql_password,
-            database='wgccc'
-        )
+        connect = sql_connect('localhost', 3306, 'root', '', 'wgccc')
 
         cursor = connect.cursor()
         cursor.execute(
