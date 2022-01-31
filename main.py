@@ -14,8 +14,9 @@ def before_first_request_func():
     global LOCAL_SQL_MODE
     o = urlparse(request.base_url)
     hostname = o.hostname
+    print("Connected to %s" % hostname)
     if hostname == "localhost":
-        sql_host = 'localhost'
+        sql_host = hostname
         sql_port = 3306
         sql_user = 'root'
         sql_password = ''
