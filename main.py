@@ -10,6 +10,8 @@ LOCAL_SQL_MODE = False
 if socket.gethostbyname("localhost"):
     print("Localhosting enabled!")
     LOCAL_SQL_MODE = True
+elif socket.gethostbyname("http://project.joshmolyneux.co.uk"):
+    print("Connected to external server")
 
 
 def setup_database():
