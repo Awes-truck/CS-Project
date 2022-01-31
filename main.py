@@ -12,8 +12,8 @@ LOCAL_SQL_MODE = False
 @app.before_first_request
 def before_first_request_func():
     global LOCAL_SQL_MODE
-    o = urlparse(request.base_url)
-    hostname = o.hostname
+    url = urlparse(request.base_url)
+    hostname = url.hostname
     print("Connected to %s" % hostname)
     if hostname == "localhost":
         sql_host = hostname
