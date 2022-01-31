@@ -1,5 +1,4 @@
 from www import create_app
-# import mysql.connector
 import pymysql
 from flask import request
 from urllib.parse import urlparse
@@ -33,7 +32,7 @@ def before_first_request_func():
         connect.commit()
         connect.close()
 
-        new_db = pymysql.connect(
+        connect = pymysql.connect(
             host=sql_host,
             port=sql_port,
             user=sql_user,
@@ -41,15 +40,15 @@ def before_first_request_func():
             database='wgccc'
         )
 
-        cursor = new_db.cursor()
+        cursor = connect.cursor()
         cursor.execute(
             '''CREATE TABLE IF NOT EXISTS users
             (id INT(6) PRIMARY KEY AUTO_INCREMENT,
             first_name VARCHAR(255),
             family_name VARCHAR(255),
             email VARCHAR(255))''')
-        new_db.commit()
-        new_db.close()
+        connect.commit()
+        connect.close()
 
 
 if __name__ == '__main__':
