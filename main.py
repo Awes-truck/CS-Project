@@ -1,14 +1,26 @@
 from www import create_app
 #import mysql.connector
 import pymysql
+import socket
 
 app = create_app()
-
 app.config['SECRET_KEY'] = 'sgeswgw43twsfwq3fafsdfq3'
-host = 'localhost'
-port = 3306
-user = 'root'
-password = ''
+LOCAL_SQL_MODE = False
+
+if socket.gethostbyname("localhost"):
+    print("Localhosting enabled!")
+    LOCAL_SQL_MODE = True
+
+if LOCAL_SQL_MODE is True:
+    host = 'localhost'
+    port = 3306
+    user = 'root'
+    password = ''
+else:
+    host = 'localhost'
+    port = 3306
+    user = 'root'
+    password = ''
 
 connect = pymysql.connect(
     host=host,
