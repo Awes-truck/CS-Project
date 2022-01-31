@@ -11,24 +11,6 @@ if socket.gethostbyname("localhost"):
     print("Localhosting enabled!")
     LOCAL_SQL_MODE = True
 
-if LOCAL_SQL_MODE is True:
-    host = 'localhost'
-    port = 3306
-    user = 'root'
-    password = ''
-else:
-    host = 'localhost'
-    port = 3306
-    user = 'root'
-    password = ''
-
-connect = pymysql.connect(
-    host=host,
-    port=port,
-    user=user,
-    password=password,
-)
-
 
 def setup_database():
     cursor = connect.cursor()
@@ -54,7 +36,21 @@ def setup_database():
     new_db.close()
 
 
-setup_database()
+if LOCAL_SQL_MODE is True:
+    host = 'localhost'
+    port = 3306
+    user = 'root'
+    password = ''
+
+    connect = pymysql.connect(
+        host=host,
+        port=port,
+        user=user,
+        password=password,
+    )
+
+    setup_database()
+
 
 if __name__ == '__main__':
     app.run(debug=True)
