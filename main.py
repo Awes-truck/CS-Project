@@ -7,10 +7,10 @@ app = create_app()
 app.config['SECRET_KEY'] = 'sgeswgw43twsfwq3fafsdfq3'
 LOCAL_SQL_MODE = False
 
-if socket.gethostbyname("localhost"):
-    print("Localhosting enabled!")
+if socket.getfqdn():  # check if localhost
+    print("Connected to localhost")
     LOCAL_SQL_MODE = True
-elif socket.gethostbyname("project.joshmolyneux.co.uk"):
+elif socket.getfqdn("project.joshmolyneux.co.uk"):
     print("Connected to external server")
 
 
