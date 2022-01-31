@@ -1,22 +1,9 @@
-from www import create_app
+from www import create_app, sql_connect
 import pymysql
 from flask import request
 from urllib.parse import urlparse
 
 app = create_app()
-app.config['SECRET_KEY'] = 'sgeswgw43twsfwq3fafsdfq3'
-LOCAL_SQL_MODE = False
-
-
-def sql_connect(host, port, user, password, database):
-    connect = pymysql.connect(
-        host=host,
-        port=port,
-        user=user,
-        password=password,
-        database=database
-    )
-    return connect
 
 
 @app.before_first_request
@@ -26,14 +13,30 @@ def before_first_request_func():
     hostname = url.hostname
     print("Connected to %s" % hostname)
     if hostname == "localhost":
-        connect = sql_connect('localhost', 3306, 'root', '', '')
+        app.config['SQL_HOST'] = 'localhost'
+        app.config['SQL_PORT'] = 3306
+        app.config['SQL_USER'] = 'root'
+        connect = sql_connect(
+            app.config['SQL_HOST'],
+            app.config['SQL_PORT'],
+            app.config['SQL_USER'],
+            app.config['SQL_PASSWORD'],
+            app.config['SQL_DATABASE']
+        )
 
         cursor = connect.cursor()
         cursor.execute("CREATE DATABASE IF NOT EXISTS wgccc")
         connect.commit()
         connect.close()
 
-        connect = sql_connect('localhost', 3306, 'root', '', 'wgccc')
+        app.config['SQL_DATABASE'] = 'wgccc'
+        connect = sql_connect(
+            app.config['SQL_HOST'],
+            app.config['SQL_PORT'],
+            app.config['SQL_USER'],
+            app.config['SQL_PASSWORD'],
+            app.config['SQL_DATABASE']
+        )
 
         cursor = connect.cursor()
         cursor.execute(
