@@ -38,7 +38,7 @@ def setup_database():
     new_db.close()
 
 
-if LOCAL_SQL_MODE is True:
+if LOCAL_SQL_MODE:
     host = 'localhost'
     port = 3306
     user = 'root'
