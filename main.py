@@ -44,7 +44,9 @@ def before_first_request_func():
             (id INT(6) PRIMARY KEY AUTO_INCREMENT,
             first_name VARCHAR(255),
             family_name VARCHAR(255),
-            email VARCHAR(255))''')
+            email VARCHAR(255) UNIQUE,
+            password VARCHAR(255),
+            address VARCHAR(255))''')
         connect.commit()
         connect.close()
 
