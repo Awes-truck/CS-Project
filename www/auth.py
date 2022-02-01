@@ -33,6 +33,7 @@ def login():
             user_password_hash = user[1]
             user_name = user[2]
             if check_password_hash(user_password_hash, password):
+                session.permanent = True
                 session['loggedin'] = True
                 session['email'] = email
                 session['name'] = user_name
@@ -48,9 +49,9 @@ def login():
 @auth.route('/logout')
 def logout():
     if session['loggedin']:
-        session.pop('loggedin', None)
         session.pop('email', None)
         session.pop('name', None)
+        session.pop('loggedin', None)
     return redirect(url_for('views.home'))
 
 

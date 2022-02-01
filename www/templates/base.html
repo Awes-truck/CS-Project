@@ -42,7 +42,6 @@
             ><span class="navbar-toggler-icon"></span>
             </button>
 
-
             <div class="collapse navbar-collapse" id="navbar">
                 <div class="navbar-nav mr-auto">
                     <a class="nav-item nav-link active" href="/">Home</a>
@@ -52,9 +51,16 @@
                     <a class="nav-item nav-link" href="#subscriptions">Subscriptions</a>
                 </div>
                 <div class="navbar-nav ml-auto">
-                    <a class="nav-item nav-link" href="/login">Login</a>
-                    <a class="nav-item nav-link" href="/register">Register</a>
+                    {% if 'loggedin' is not in session %}
+                        <a class="nav-item nav-link" href="/login">Login</a>
+                        <a class="nav-item nav-link" href="/register">Register</a>
+                    {% else %}
+                        <a class="nav-item nav-link" href="/logout">Logout</a>
+                    {% endif %}
                 </div>
+                {% if 'loggedin' is in session %}
+                    <span class='greeting'>Hello, {{ session['name'] }}</span>
+                {% endif %}
             </div>
         </nav>
 

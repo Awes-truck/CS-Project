@@ -54,11 +54,18 @@ a {
 }
 
 .navbar-nav.ml-auto{
-	padding-right: 10%;
+	padding-right: 5%;
 }
 
 .navbar-toggler{
 	margin-left: 1% !important;
+}
+
+.greeting{
+	font-size: 1vw;
+	text-align: right;
+	color: white;
+	padding-right: 10px
 }
 
 @media (max-width: 991.98px) {
@@ -78,6 +85,7 @@ a {
 	    padding: 10px;
 	}
 }
+
 #copyright {
   	text-align: center;
 	font-size: 1vw;
