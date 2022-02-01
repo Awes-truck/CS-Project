@@ -124,6 +124,6 @@ def register():
             cursor.close()
             connect.close()
             flash('Account successfully created!', category='success')
-            return redirect(url_for('views.home'))
+            return redirect(url_for('views.login'))
 
     return render_template("register.html",  datetime=str(datetime.now().year))
