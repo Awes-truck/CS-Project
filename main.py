@@ -2,9 +2,10 @@ from www import create_app, sql_connect
 import pymysql
 from flask import request
 from urllib.parse import urlparse
+from datetime import timedelta
 
 app = create_app()
-
+app.permanent_session_lifetime = timedelta(days=7)
 
 @app.before_first_request
 def before_first_request_func():
