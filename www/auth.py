@@ -1,5 +1,4 @@
 from flask import Blueprint, render_template, redirect, session, url_for, request, flash, current_app as app
-from flask_login import login_user, login_required, logout_user, current_user
 from datetime import datetime
 # import pymysql
 from .__init__ import sql_connect
