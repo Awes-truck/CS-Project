@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, redirect, url_for, request, flash, current_app as app
+from flask import Blueprint, render_template, redirect, session, url_for, request, flash, current_app as app
+from flask_login import login_user, login_required, logout_user, current_user
 from datetime import datetime
 # import pymysql
 from .__init__ import sql_connect
@@ -18,10 +19,39 @@ def login():
     )
 
     if request.method == 'POST':
-        email = request.get('email')
-        password = request.get('password')
+        email = request.form.get('email')
+        password = request.form.get('password')
 
+        cursor = connect.cursor()
+        user = cursor.execute(
+            '''SELECT id, password, first_name FROM users WHERE email='%s' '''
+            % email
+        )
+        user = cursor.fetchone()
+        if user:
+            user_id = user[0]
+            user_password_hash = user[1]
+            user_name = user[2]
+            if check_password_hash(user_password_hash, password):
+                session['loggedin'] = True
+                session['email'] = email
+                session['name'] = user_name
+                flash('Logged in Successfully!', category='success')
+                return redirect(url_for('views.home'))
+            else:
+                flash('Incorrect password. Please try again!', category='error')
+        else:
+            flash('Incorrect email. Please try again!', category='error')
     return render_template("login.html",  datetime=str(datetime.now().year))
+
+
+@auth.route('/logout')
+def logout():
+    if session['loggedin']:
+        session.pop('loggedin', None)
+        session.pop('email', None)
+        session.pop('name', None)
+    return redirect(url_for('views.home'))
 
 
 @auth.route('/register', methods=['GET', 'POST'])
@@ -57,6 +87,7 @@ def register():
             '''SELECT email FROM users WHERE email = '%s' ''' % email)
         if query != 0:
             email_exists = True
+        cursor.close()
 
         for i in postal_keys:
             if str(request.form.get(i)) == "":
@@ -90,6 +121,7 @@ def register():
                 VALUES ('%s', '%s', '%s', '%s', '%s')'''
                 % (first_name, family_name, email, password_hash, full_address))
             connect.commit()
+            cursor.close()
             connect.close()
             flash('Account successfully created!', category='success')
             return redirect(url_for('views.home'))
