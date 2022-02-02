@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template, redirect, session, url_for, request, flash, current_app as app
 from datetime import datetime
-# import pymysql
 from .__init__ import sql_connect
 from werkzeug.security import generate_password_hash, check_password_hash
 
