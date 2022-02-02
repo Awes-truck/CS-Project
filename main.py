@@ -1,5 +1,4 @@
 from www import create_app, sql_connect
-import pymysql
 from flask import request
 from urllib.parse import urlparse
 from datetime import timedelta
