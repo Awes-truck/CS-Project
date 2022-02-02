@@ -19,7 +19,7 @@ def before_first_request_func():
         app.config['SQL_HOST'] = 'localhost'
         app.config['SQL_PORT'] = 3306
         app.config['SQL_USER'] = 'root'
-        app.config['SQL_PASSWORD'] = 'bIUNDI3W78ND9!@DS9#'
+        app.config['SQL_PASSWORD'] = ''  # 'bIUNDI3W78ND9!@DS9#'
         connect = sql_connect(
             app.config['SQL_HOST'],
             app.config['SQL_PORT'],
