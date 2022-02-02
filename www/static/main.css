@@ -84,6 +84,12 @@ a {
 	    height: 10%;
 	    padding: 10px;
 	}
+
+	#copyright {
+	  	text-align: center;
+		font-size: 2vw;
+	}
+
 }
 
 #copyright {
