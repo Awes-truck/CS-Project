@@ -9,6 +9,10 @@ auth = Blueprint('auth', __name__)
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
+    if 'loggedin' in session:
+        flash('You\'re already logged in!', category='error')
+        return redirect(url_for('views.home'))
+
     connect = sql_connect(
         app.config['SQL_HOST'],
         app.config['SQL_PORT'],
@@ -56,6 +60,10 @@ def logout():
 
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
+    if 'loggedin' in session:
+        flash('Logout to access this page!', category='error')
+        return redirect(url_for('views.home'))
+
     connect = sql_connect(
         app.config['SQL_HOST'],
         app.config['SQL_PORT'],
