@@ -13,6 +13,12 @@ def home():
 def news():
     return render_template("news.html", datetime=str(datetime.now().year))
 
+
+@views.route('/subscriptions')
+@views.route('/payment')
+def subscriptions():
+    return render_template("subscriptions.html", datetime=str(datetime.now().year))
+
 # @views.route('/index')
 # def index():
 #     return render_template("home.html", datetime=str(datetime.now().year))
