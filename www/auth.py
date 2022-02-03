@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, redirect, session, url_for, reques
 from datetime import datetime
 from .__init__ import sql_connect
 import os
+import stripe
 from werkzeug.security import generate_password_hash, check_password_hash
 
 auth = Blueprint('auth', __name__)
@@ -11,6 +12,7 @@ SQL_PORT = int(os.getenv("SQL_PORT"))
 SQL_USER = os.getenv("SQL_USER")
 SQL_PASSWORD = os.getenv("SQL_PASSWORD")
 SQL_DATABASE = os.getenv("SQL_DATABASE")
+stripe.api_key = os.getenv("STRIPE_API_TEST")
 
 connect = sql_connect(
     SQL_HOST,
@@ -70,6 +72,8 @@ def register():
     if 'loggedin' in session:
         flash('Logout to access this page!', category='error')
         return redirect(url_for('views.home'))
+
+
 
     postal_keys = [
         'street_number',
