@@ -22,16 +22,10 @@ def sql_connect(host, port, user, password, database):
     return connect
 
 
-def generate_secret_key():
-    chars = string.ascii_letters + string.digits + string.punctuation
-    secret_key = ''.join(random.choice(chars) for i in range(8))
-    return secret_key
-
-
 def create_app():
     app = Flask(__name__)
 
-    app.config['SECRET_KEY'] = key_hash(generate_secret_key())
+    app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
     # will be set dependent on where the app is hosted
 
     from.views import views
