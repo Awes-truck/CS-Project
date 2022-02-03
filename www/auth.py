@@ -1,9 +1,24 @@
 from flask import Blueprint, render_template, redirect, session, url_for, request, flash, current_app as app
 from datetime import datetime
 from .__init__ import sql_connect
+import os
 from werkzeug.security import generate_password_hash, check_password_hash
 
 auth = Blueprint('auth', __name__)
+
+SQL_HOST = os.getenv("SQL_HOST")
+SQL_PORT = int(os.getenv("SQL_PORT"))
+SQL_USER = os.getenv("SQL_USER")
+SQL_PASSWORD = os.getenv("SQL_PASSWORD")
+SQL_DATABASE = os.getenv("SQL_DATABASE")
+
+connect = sql_connect(
+    SQL_HOST,
+    SQL_PORT,
+    SQL_USER,
+    SQL_PASSWORD,
+    SQL_DATABASE
+)
 
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -11,14 +26,6 @@ def login():
     if 'loggedin' in session:
         flash('You\'re already logged in!', category='error')
         return redirect(url_for('views.home'))
-
-    connect = sql_connect(
-        app.config['SQL_HOST'],
-        app.config['SQL_PORT'],
-        app.config['SQL_USER'],
-        app.config['SQL_PASSWORD'],
-        app.config['SQL_DATABASE']
-    )
 
     if request.method == 'POST':
         email = request.form.get('email')
@@ -31,6 +38,7 @@ def login():
         )
         user = cursor.fetchone()
         if user:
+            # Not used, but still needs to be declared to work for some reason
             user_id = user[0]
             user_password_hash = user[1]
             user_name = user[2]
@@ -63,13 +71,6 @@ def register():
         flash('Logout to access this page!', category='error')
         return redirect(url_for('views.home'))
 
-    connect = sql_connect(
-        app.config['SQL_HOST'],
-        app.config['SQL_PORT'],
-        app.config['SQL_USER'],
-        app.config['SQL_PASSWORD'],
-        app.config['SQL_DATABASE']
-    )
     postal_keys = [
         'street_number',
         'route',
