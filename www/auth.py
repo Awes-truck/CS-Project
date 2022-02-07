@@ -60,10 +60,14 @@ def login():
 
 @auth.route('/logout')
 def logout():
+    session_vars = [
+        'email',
+        'name',
+        'loggedin'
+    ]
     if session['loggedin']:
-        session.pop('email', None)
-        session.pop('name', None)
-        session.pop('loggedin', None)
+        for i in session_vars:
+            session.pop(i, None)
     return redirect(url_for('views.home'))
 
 
