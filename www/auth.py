@@ -77,8 +77,6 @@ def register():
         flash('Logout to access this page!', category='error')
         return redirect(url_for('views.home'))
 
-
-
     postal_keys = [
         'street_number',
         'route',
