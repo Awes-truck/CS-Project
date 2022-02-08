@@ -49,6 +49,7 @@ def login():
                 session['loggedin'] = True
                 session['email'] = email
                 session['name'] = user_name
+                session['id'] = user_id
                 flash('Logged in Successfully!', category='success')
                 return redirect(url_for('views.home'))
             else:
@@ -63,7 +64,8 @@ def logout():
     session_vars = [
         'email',
         'name',
-        'loggedin'
+        'loggedin',
+        'id'
     ]
     if session['loggedin']:
         for i in session_vars:
