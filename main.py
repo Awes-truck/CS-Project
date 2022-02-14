@@ -30,6 +30,7 @@ def before_first_request_func():
     )
 
     cursor = connect.cursor()
+    connect.commit()
     cursor.execute("CREATE DATABASE IF NOT EXISTS awestruck")
     connect.commit()
     connect.close()

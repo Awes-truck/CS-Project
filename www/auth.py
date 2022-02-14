@@ -12,7 +12,7 @@ SQL_PORT = int(os.getenv("SQL_PORT"))
 SQL_USER = os.getenv("SQL_USER")
 SQL_PASSWORD = os.getenv("SQL_PASSWORD")
 SQL_DATABASE = os.getenv("SQL_DATABASE")
-stripe.api_key = os.getenv("STRIPE_API_TEST")
+stripe.api_key = os.getenv("STRIPE_API_TEST_SK")
 
 connect = sql_connect(
     SQL_HOST,
@@ -135,16 +135,22 @@ def register():
             cursor = connect.cursor()
             cursor.execute(
                 '''INSERT INTO users (first_name, family_name, email, password, address, phone_number)
-                VALUES ('%s', '%s', '%s', '%s', '%s')'''
+                VALUES ('%s', '%s', '%s', '%s', '%s', '%s')'''
                 % (first_name, family_name, email, password_hash, full_address, phone_number))
             connect.commit()
             cursor.close()
             connect.close()
             flash('Account successfully created!', category='success')
             stripe.Customer.create(
-                description="",
-                address=full_address,
-                name=first_name + family_name,
+                description=" ",
+                address={
+                    'line1': request.form.get(postal_keys[0]),
+                    'line2': request.form.get(postal_keys[1]),
+                    'city': request.form.get(postal_keys[2]),
+                    'state': request.form.get(postal_keys[3]),
+                    'postal_code': request.form.get(postal_keys[4])
+                },
+                name=" ".join([first_name, family_name]),
                 email=email,
                 phone=phone_number
             )
