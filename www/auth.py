@@ -155,6 +155,6 @@ def register():
                 phone=phone_number
             )
 
-            return redirect(url_for('auth.login'))
+            return redirect(url_for('views.home'))
 
     return render_template("register.html",  datetime=str(datetime.now().year))
