@@ -97,6 +97,7 @@ def register():
         family_name = request.form.get('family_name')
         password = request.form.get('password')
         password_confirm = request.form.get('password_confirm')
+        phone_number = request.form.get('phone')
 
         cursor = connect.cursor()
         query = cursor.execute(
@@ -133,13 +134,21 @@ def register():
             password_hash = generate_password_hash(password, method='sha256')
             cursor = connect.cursor()
             cursor.execute(
-                '''INSERT INTO users (first_name, family_name, email, password, address)
+                '''INSERT INTO users (first_name, family_name, email, password, address, phone_number)
                 VALUES ('%s', '%s', '%s', '%s', '%s')'''
-                % (first_name, family_name, email, password_hash, full_address))
+                % (first_name, family_name, email, password_hash, full_address, phone_number))
             connect.commit()
             cursor.close()
             connect.close()
             flash('Account successfully created!', category='success')
+            stripe.Customer.create(
+                description="",
+                address=full_address,
+                name=first_name + family_name,
+                email=email,
+                phone=phone_number
+            )
+
             return redirect(url_for('auth.login'))
 
     return render_template("register.html",  datetime=str(datetime.now().year))

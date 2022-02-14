@@ -17,6 +17,7 @@ def news():
 @views.route('/subscriptions')
 @views.route('/payment')
 def subscriptions():
+    
     return render_template("subscriptions.html", datetime=str(datetime.now().year))
 
 # @views.route('/index')
