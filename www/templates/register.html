@@ -1,16 +1,31 @@
 {% extends "base.html" %} {% block title %}WGCCC - Register{%endblock%}
 {%block content%}
+<link rel="stylesheet" href="https://cdn.tutorialjinni.com/intl-tel-input/17.0.8/css/intlTelInput.css"/>
 <form method="POST">
     <h3 align="center"> Registration </h3>
     <div class="form-group">
-        <label class="control-label" for="email">Email Address</label>
-        <input
-            type="email"
-            class="form-control"
-            id="email"
-            name="email"
-            placeholder="Enter your email..."
-        />
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label" for="email">Email Address</label>
+                <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email..."
+                />
+            </div>
+            <div class="col-md-6">
+                <label class="control-label" for="phone">Phone Number</label>
+                <input
+                    type="phone"
+                    class="form-control"
+                    id="phone"
+                    name="phone"
+                    placeholder="Enter your phone number..."
+                />
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-6">
                 <label class="control-label" for="first_name">First Name</label>
@@ -96,4 +111,5 @@
 <button type="submit" class="btn btn-primary">Submit</button>
 <script type="text/javascript" src="./static/js/auto-complete.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEm1-Vnk8OeHE_R4TT5-Vn8SW7iaVvpfQ&libraries=places&callback=initAutocomplete"></script>
+<script src="https://cdn.tutorialjinni.com/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 {%endblock%}
