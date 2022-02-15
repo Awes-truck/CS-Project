@@ -3,23 +3,40 @@
     <div class='subs-header'>
         Subscriptions
     </div>
-    <ul class='products'>
-        <li>
-            <strong>Senior Member</strong><br>
-            £180.00
-            <form name='senior' method="POST">
-                <input type="hidden" id="senior" name="senior" value="senior">
-                <button class="btn btn-primary" type="submit">Checkout</button>
-            </form>
-        </li>
-        <li>
-            <strong>Junior Member</strong><br>
-            £135.00
-            <form name='junior' method="POST">
-                <input type="hidden" id="junior" name="junior" value="junior">
-                <button class="btn btn-primary" type="submit">Checkout</button>
-            </form>
-        </li>
-    </ul>
+    <div class='seniors'>
+        <h1>Senior Subscriptions</h1>
+        <ul class='products'>
+            <li>
+                <span class='name'>Senior Member</span><br>
+                <span class='price'>£180.00</span>
+                <form name='senior' method="POST">
+                    <input type="hidden" id="senior" name="senior" value="senior">
+                    <button class="btn btn-primary" type="submit">Checkout</button>
+                </form>
+            </li>
+            <li>
+                <span class='name'>Senior Member</span><br>
+                <span class='name'>(Unemployed / Full-Time Education)</span><br>
+                <span class='price'>£90.00</span>
+                <form name='senior_edu' method="POST">
+                    <input type="hidden" id="senior_edu" name="senior_edu" value="senior_edu">
+                    <button class="btn btn-primary" type="submit">Checkout</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+    <div class='juniors'>
+        <h1>Junior Subscriptions</h1>
+        <ul class='products'>
+            <li>
+                <span class='name'>Junior Member</span><br>
+                <span class='price'>£135.00</span>
+                <form name='junior' method="POST">
+                    <input type="hidden" id="junior" name="junior" value="junior">
+                    <button class="btn btn-primary" type="submit">Checkout</button>
+                </form>
+            </li>
+        </ul>
+    </div>
 
 {%endblock%}
