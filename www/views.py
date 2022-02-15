@@ -22,6 +22,7 @@ def subscriptions():
     url = urlparse(request.base_url)
     hostname = url.hostname
     port = ''
+    price_id = ''
     if hostname == 'localhost':
         port = ':5000'
     else:
@@ -31,27 +32,26 @@ def subscriptions():
             flash('You must be logged in to make purchases', category='error')
             return redirect(url_for('auth.login'))
         if request.form.get('senior'):
-            stripe_session = stripe.checkout.Session.create(
-                customer_email=session['email'],
-                line_items=[{
-                    'price': 'price_1KTNDVHuaTKPzffS1ubgGAr7',
-                    'quantity': 1
-                }],
-                mode='subscription',
-                success_url='http://' + hostname + port + '/subscriptions',
-                cancel_url='http://' + hostname + port + '/subscriptions'
-            )
+            price_id = 'price_1KTNDVHuaTKPzffS1ubgGAr7'
+        elif request.form.get('senior_edu'):
+            price_id = 'price_1KTS4HHuaTKPzffSsYTpJcNQ'
         elif request.form.get('junior'):
-            stripe_session = stripe.checkout.Session.create(
-                customer_email=session['email'],
-                line_items=[{
-                    'price': 'price_1KTOPyHuaTKPzffS5yvO1LSb',
-                    'quantity': 1
-                }],
-                mode='subscription',
-                success_url='http://' + hostname + port + '/subscriptions',
-                cancel_url='http://' + hostname + port + '/subscriptions'
-            )
+            price_id = 'price_1KTOPyHuaTKPzffS5yvO1LSb'
+        else:
+            flash(
+                "There was an error - please contact the system administrator",
+                category='error')
+            return redirect(url_for('views.home'))
+        stripe_session = stripe.checkout.Session.create(
+            customer_email=session['email'],
+            line_items=[{
+                'price': price_id,
+                'quantity': 1
+            }],
+            mode='subscription',
+            success_url='http://' + hostname + port + '/subscriptions',
+            cancel_url='http://' + hostname + port + '/subscriptions'
+        )
         return redirect(stripe_session.url, code=303)
     return render_template("subscriptions.html", datetime=str(datetime.now().year))
 
