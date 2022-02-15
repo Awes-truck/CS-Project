@@ -86,26 +86,7 @@ a {
 	padding-bottom: 30px;
 }
 
-ul.products li{
-	display:inline-block;
-	align-items: center;
-	padding-right: 20px;
-	border-radius: 25px;
-  	background: var(--white);
-  	padding: 20px;
-  	width: auto;
-  	height: 150px;
-	text-align: center;
-	vertical-align:top;
-}
 
-ul.products li .name{
-	font-weight: bold;
-}
-
-ul.products li .price{
-	font-size: 25px;
-}
 
 @media (max-width: 991.98px) {
 	.navbar-nav .nav-item.nav-link {

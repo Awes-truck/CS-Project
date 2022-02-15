@@ -11,16 +11,16 @@
                 <span class='price'>£180.00</span>
                 <form name='senior' method="POST">
                     <input type="hidden" id="senior" name="senior" value="senior">
-                    <button class="btn btn-primary" type="submit">Checkout</button>
+                    <button id='checkout' class="btn btn-primary" type="submit">Checkout</button>
                 </form>
             </li>
             <li>
                 <span class='name'>Senior Member</span><br>
-                <span class='name'>(Unemployed / Full-Time Education)</span><br>
+                <span class='short_desc'>(Unemployed / Full-Time Education)</span><br>
                 <span class='price'>£90.00</span>
                 <form name='senior_edu' method="POST">
                     <input type="hidden" id="senior_edu" name="senior_edu" value="senior_edu">
-                    <button class="btn btn-primary" type="submit">Checkout</button>
+                    <button id='checkout' class="btn btn-primary" type="submit">Checkout</button>
                 </form>
             </li>
             <li>
@@ -28,7 +28,7 @@
                 <span class='price'>£20.00</span>
                 <form name='social' method="POST">
                     <input type="hidden" id="senior_edu" name="social" value="social">
-                    <button class="btn btn-primary" type="submit">Checkout</button>
+                    <button id='checkout' class="btn btn-primary" type="submit">Checkout</button>
                 </form>
             </li>
         </ul>
@@ -38,10 +38,11 @@
         <ul class='products'>
             <li>
                 <span class='name'>Junior Member</span><br>
+                <span class='short_desc'>*includes Social Member</span><br>
                 <span class='price'>£135.00</span>
                 <form name='junior' method="POST">
                     <input type="hidden" id="junior" name="junior" value="junior">
-                    <button class="btn btn-primary" type="submit">Checkout</button>
+                    <button id='checkout' class="btn btn-primary" type="submit">Checkout</button>
                 </form>
             </li>
         </ul>
