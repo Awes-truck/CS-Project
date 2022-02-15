@@ -36,6 +36,8 @@ def subscriptions():
             price_id = 'price_1KTNDVHuaTKPzffS1ubgGAr7'
         elif request.form.get('senior_edu'):
             price_id = 'price_1KTS4HHuaTKPzffSsYTpJcNQ'
+        elif request.form.get('social'):
+            price_id = 'price_1KTT07HuaTKPzffSkYKw4EPw'
         elif request.form.get('junior'):
             price_id = 'price_1KTOPyHuaTKPzffS5yvO1LSb'
         else:
