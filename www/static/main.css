@@ -134,8 +134,8 @@ a {
 	    padding: 10px;
 	}
 
-	.product-card{
-		width: 100%;
+	.product-card {
+		flex-direction: column; 
 	}
 
 	#copyright {
