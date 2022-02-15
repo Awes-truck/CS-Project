@@ -134,6 +134,10 @@ a {
 	    padding: 10px;
 	}
 
+	.product-card{
+		width: 100%;
+	}
+
 	#copyright {
 	  	text-align: center;
 		font-size: 2vw;
