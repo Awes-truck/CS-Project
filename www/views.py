@@ -22,7 +22,6 @@ def subscriptions():
     url = urlparse(request.base_url)
     hostname = url.hostname
     port = ''
-    price_id = ''
     if hostname == 'localhost':
         port = ':5000'
     else:
@@ -31,6 +30,8 @@ def subscriptions():
         if 'loggedin' not in session:
             flash('You must be logged in to make purchases', category='error')
             return redirect(url_for('auth.login'))
+
+        price_id = ''
         if request.form.get('senior'):
             price_id = 'price_1KTNDVHuaTKPzffS1ubgGAr7'
         elif request.form.get('senior_edu'):
