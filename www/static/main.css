@@ -86,9 +86,15 @@ a {
 	padding-bottom: 30px;
 }
 
-.subs-container{
-
-
+ul.products li{
+	display:inline-block;
+	padding-right: 20px;
+	border-radius: 25px;
+  	background: #2ED3DD;
+  	padding: 20px;
+  	width: 200px;
+  	height: 150px;
+	text-align: center;
 }
 
 @media (max-width: 991.98px) {
