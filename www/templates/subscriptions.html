@@ -4,8 +4,22 @@
         Subscriptions
     </div>
     <ul class='products'>
-        <li>Playing Member</li>
-        <li>Junior Member</li>
+        <li>
+            <strong>Senior Member</strong><br>
+            £180.00
+            <form name='senior' method="POST">
+                <input type="hidden" id="senior" name="senior" value="senior">
+                <button class="btn btn-primary" type="submit">Checkout</button>
+            </form>
+        </li>
+        <li>
+            <strong>Junior Member</strong><br>
+            £135.00
+            <form name='junior' method="POST">
+                <input type="hidden" id="junior" name="junior" value="junior">
+                <button class="btn btn-primary" type="submit">Checkout</button>
+            </form>
+        </li>
     </ul>
 
 {%endblock%}
