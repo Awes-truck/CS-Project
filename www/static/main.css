@@ -86,7 +86,36 @@ a {
 	padding-bottom: 30px;
 }
 
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 30px;
+}
 
+.product-card {
+    flex: 1 20%;
+    text-align: center;
+	list-style-type: none;
+    border: 1px solid #eee;
+	background: var(--white);
+    padding: 5px;
+}
+
+.product-card .name{
+	font-weight: bold;
+}
+
+.product-card .short_desc{
+	font-size: 15px;
+}
+
+.product-card .price{
+	font-size: 25px;
+}
+
+.product-card button{
+	width: 80%
+}
 
 @media (max-width: 991.98px) {
 	.navbar-nav .nav-item.nav-link {
