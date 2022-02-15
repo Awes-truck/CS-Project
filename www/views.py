@@ -21,12 +21,16 @@ def news():
 def subscriptions():
     url = urlparse(request.base_url)
     hostname = url.hostname
+    port = ''
+    if hostname == 'localhost':
+        port = ':5000'
+    else:
+        port = ':80'
     if request.method == "POST":
         if 'loggedin' not in session:
             flash('You must be logged in to make purchases', category='error')
             return redirect(url_for('auth.login'))
         if request.form.get('senior'):
-            print("Senior test")
             stripe_session = stripe.checkout.Session.create(
                 customer_email=session['email'],
                 line_items=[{
@@ -34,11 +38,10 @@ def subscriptions():
                     'quantity': 1
                 }],
                 mode='subscription',
-                success_url='http://' + hostname + '/subscriptions:5000',
-                cancel_url='http://' + hostname + '/subscriptions:5000'
+                success_url='http://' + hostname + port + '/subscriptions',
+                cancel_url='http://' + hostname + port + '/subscriptions'
             )
-        if request.form.get('junior'):
-            print("Junior test")
+        elif request.form.get('junior'):
             stripe_session = stripe.checkout.Session.create(
                 customer_email=session['email'],
                 line_items=[{
@@ -46,11 +49,10 @@ def subscriptions():
                     'quantity': 1
                 }],
                 mode='subscription',
-                success_url='http://' + hostname + '/subscriptions:5000',
-                cancel_url='http://' + hostname + '/subscriptions:5000'
+                success_url='http://' + hostname + port + '/subscriptions',
+                cancel_url='http://' + hostname + port + '/subscriptions'
             )
         return redirect(stripe_session.url, code=303)
-        print("Test3")
     return render_template("subscriptions.html", datetime=str(datetime.now().year))
 
 
