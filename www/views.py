@@ -16,7 +16,6 @@ def home():
 def subscriptions():
     url = urlparse(request.base_url)
     hostname = url.hostname
-    port = ''
     if hostname == 'localhost':
         port = ':5000'
     else:
