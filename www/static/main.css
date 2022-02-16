@@ -101,6 +101,10 @@ a {
     padding: 5px;
 }
 
+.product-card:hover{
+	opacity: 0.9
+}
+
 .product-card .name{
 	font-weight: bold;
 }
@@ -135,7 +139,7 @@ a {
 	}
 
 	.product-card {
-		flex-direction: column; 
+		flex-direction: column;
 	}
 
 	#copyright {

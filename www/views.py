@@ -12,11 +12,6 @@ def home():
     return render_template("home.html", datetime=str(datetime.now().year))
 
 
-@views.route('/news')
-def news():
-    return render_template("news.html", datetime=str(datetime.now().year))
-
-
 @views.route('/subscriptions', methods=['GET', 'POST'])
 def subscriptions():
     url = urlparse(request.base_url)
