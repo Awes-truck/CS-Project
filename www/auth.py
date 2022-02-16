@@ -39,6 +39,7 @@ def login():
             % email
         )
         user = cursor.fetchone()
+        cursor.close()
         if user:
             # Not used, but still needs to be declared to work for some reason
             user_id = user[0]
@@ -139,7 +140,6 @@ def register():
                 % (first_name, family_name, email, password_hash, full_address, phone_number))
             connect.commit()
             cursor.close()
-            connect.close()
             flash('Account successfully created!', category='success')
             stripe.Customer.create(
                 description=" ",

@@ -56,37 +56,6 @@ def subscriptions():
     return render_template("subscriptions.html", datetime=str(datetime.now().year))
 
 
-# @views.route('/payment', methods=['GET', 'POST'])
-# def payment():
-#     if request.method == "POST":
-#         if request.form.get('senior'):
-#             print("Senior test")
-#             stripe_session = stripe.checkout.Session.create(
-#                 line_items=[{
-#                     'price': 'price_1KTNDVHuaTKPzffS1ubgGAr7',
-#                     'quantity': 1
-#                 }],
-#                 mode='payment',
-#                 success_url=url_for('views.home'),
-#                 cancel_url=url_for('views.home')
-#             )
-#             return redirect(stripe_session.url, code=303)
-#         if request.form.get('junior'):
-#             print("Junior test")
-#             stripe_session = stripe.checkout.Session.create(
-#                 line_items=[{
-#                     'price': 'price_1KTOPyHuaTKPzffS5yvO1LSb',
-#                     'quantity': 1
-#                 }],
-#                 mode='payment',
-#                 success_url=url_for('views.home'),
-#                 cancel_url=url_for('views.home')
-#             )
-#             return redirect(stripe_session.url, code=303)
-#         print("Test3")
-#     return render_template("subscriptions.html", datetime=str(datetime.now().year))
-
-
 # @views.route('/index')
 # def index():
 #     return render_template("home.html", datetime=str(datetime.now().year))

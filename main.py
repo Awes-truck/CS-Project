@@ -52,6 +52,8 @@ def before_first_request_func():
             description VARCHAR(255)
         );
     ''')
+    cursor.close()
+    cursor = connect.cursor()
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS seniors(
             senior_id INT(6) PRIMARY KEY AUTO_INCREMENT,
@@ -65,6 +67,8 @@ def before_first_request_func():
             FOREIGN KEY (group_id) REFERENCES usergroups(group_id)
         );
     ''')
+    cursor.close()
+    cursor = connect.cursor()
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS juniors(
             junior_id INT(6) PRIMARY KEY AUTO_INCREMENT,
@@ -77,7 +81,6 @@ def before_first_request_func():
     ''')
     connect.commit()
     cursor.close()
-    connect.close()
 
 
 if __name__ == '__main__':
