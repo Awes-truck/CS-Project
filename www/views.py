@@ -40,6 +40,8 @@ def subscriptions():
             price_id = 'price_1KTT07HuaTKPzffSkYKw4EPw'
         elif request.form.get('junior'):
             price_id = 'price_1KTOPyHuaTKPzffS5yvO1LSb'
+        elif request.form.get('junior_dev'):
+            price_id = 'price_1KTnk8HuaTKPzffSo8JBgFX2'
         else:
             flash(
                 "There was an error - please contact the system administrator",
