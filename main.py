@@ -30,8 +30,7 @@ def before_first_request_func():
     )
 
     cursor = connect.cursor()
-    connect.commit()
-    cursor.execute("CREATE DATABASE IF NOT EXISTS awestruck")
+    cursor.execute('''CREATE DATABASE IF NOT EXISTS awestruck''')
     connect.commit()
     connect.close()
 
@@ -46,16 +45,38 @@ def before_first_request_func():
     )
 
     cursor = connect.cursor()
-    cursor.execute(
-        '''CREATE TABLE IF NOT EXISTS users
-        (id INT(6) PRIMARY KEY AUTO_INCREMENT,
-        first_name VARCHAR(255),
-        family_name VARCHAR(255),
-        email VARCHAR(255) UNIQUE,
-        password VARCHAR(255),
-        address VARCHAR(255),
-        phone_number VARCHAR(255))''')
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS usergroups(
+            group_id INT(6) PRIMARY KEY AUTO_INCREMENT,
+            name VARCHAR(30) NOT NULL,
+            description VARCHAR(255)
+        );
+    ''')
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS seniors(
+            senior_id INT(6) PRIMARY KEY AUTO_INCREMENT,
+            first_name VARCHAR(40) NOT NULL,
+            family_name VARCHAR(40) NOT NULL,
+            email VARCHAR(100) NOT NULL UNIQUE,
+            password VARCHAR(100) NOT NULL,
+            address VARCHAR(255) NOT NULL,
+            phone_number VARCHAR(30),
+            group_id INT(6),
+            FOREIGN KEY (group_id) REFERENCES usergroups(group_id)
+        );
+    ''')
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS juniors(
+            junior_id INT(6) PRIMARY KEY AUTO_INCREMENT,
+            first_name VARCHAR(40) NOT NULL,
+            family_name VARCHAR(40) NOT NULL,
+            senior_id INT(6),
+            FOREIGN KEY (senior_id) REFERENCES seniors(senior_id),
+            is_developmental BIT(1) DEFAULT 0
+        );
+    ''')
     connect.commit()
+    cursor.close()
     connect.close()
 
 

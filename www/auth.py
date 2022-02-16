@@ -35,7 +35,7 @@ def login():
 
         cursor = connect.cursor()
         user = cursor.execute(
-            '''SELECT id, password, first_name FROM users WHERE email='%s' '''
+            '''SELECT senior_id, password, first_name FROM seniors WHERE email='%s' '''
             % email
         )
         user = cursor.fetchone()
@@ -101,7 +101,7 @@ def register():
 
         cursor = connect.cursor()
         query = cursor.execute(
-            '''SELECT email FROM users WHERE email = '%s' ''' % email)
+            '''SELECT email FROM seniors WHERE email = '%s' ''' % email)
         if query != 0:
             email_exists = True
         cursor.close()
@@ -134,7 +134,7 @@ def register():
             password_hash = generate_password_hash(password, method='sha256')
             cursor = connect.cursor()
             cursor.execute(
-                '''INSERT INTO users (first_name, family_name, email, password, address, phone_number)
+                '''INSERT INTO seniors (first_name, family_name, email, password, address, phone_number)
                 VALUES ('%s', '%s', '%s', '%s', '%s', '%s')'''
                 % (first_name, family_name, email, password_hash, full_address, phone_number))
             connect.commit()
