@@ -63,14 +63,7 @@ def login():
 @auth.route('/logout')
 @login_required
 def logout():
-    session_vars = [
-        'email',
-        'name',
-        'loggedin',
-        'id'
-    ]
-    for i in session_vars:
-        session.pop(i, None)
+    session.clear()
     return redirect(url_for('views.home'))
 
 
