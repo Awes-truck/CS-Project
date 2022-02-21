@@ -1,10 +1,22 @@
-from flask import Flask
+from flask import Flask, redirect, url_for, session, flash
+from functools import wraps
 import pymysql
 from dotenv import load_dotenv
 import os
 
 project_folder = os.path.expanduser('www')  # adjust as appropriate
 load_dotenv(os.path.join(project_folder, '.env'))
+
+
+def login_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'loggedin' in session:
+            return f(*args, **kwargs)
+        else:
+            flash("You are not logged in!", category='error')
+            return redirect(url_for('views.home'))
+    return wrap
 
 
 def sql_connect(host, port, user, password, database):

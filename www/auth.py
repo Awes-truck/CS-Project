@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, session, url_for, request, flash, current_app as app
 from datetime import datetime
-from .__init__ import sql_connect
+from .__init__ import sql_connect, login_required
 import os
 import stripe
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -61,6 +61,7 @@ def login():
 
 
 @auth.route('/logout')
+@login_required
 def logout():
     session_vars = [
         'email',
@@ -68,9 +69,8 @@ def logout():
         'loggedin',
         'id'
     ]
-    if session['loggedin']:
-        for i in session_vars:
-            session.pop(i, None)
+    for i in session_vars:
+        session.pop(i, None)
     return redirect(url_for('views.home'))
 
 
