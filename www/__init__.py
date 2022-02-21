@@ -15,7 +15,7 @@ def login_required(f):
             return f(*args, **kwargs)
         else:
             flash("You are not logged in!", category='error')
-            return redirect(url_for('views.home'))
+            return redirect(url_for('auth.login'))
     return wrap
 
 
