@@ -75,11 +75,20 @@ a {
 	padding-right: 10px
 }
 
-.required{
+.form-group {
+	width: 70% !important;
+	margin-left: 15% !important;
+}
+
+.auth-submit {
+	margin-left: 15% !important;
+}
+
+.required {
 	color: var(--red);
 }
 
-.subs-header{
+.subs-header {
 	font-size: 2vw;
 	font-weight: bold;
 	text-align: center;
