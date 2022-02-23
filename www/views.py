@@ -81,6 +81,7 @@ def subscriptions():
                 session['junior_family_name'] = request.form.get(
                     'junior_family_name')
                 session['junior_dob'] = request.form.get('junior_dob')
+                print(session['junior_dob'])
         return redirect(stripe_session.url, code=303)
     return render_template("subscriptions.html", datetime=str(datetime.now().year))
 
@@ -120,7 +121,7 @@ def success():
                         (first_name, family_name, dob, senior_id)
                     VALUES
                         ('%s', '%s', '%s', '%s')
-                ''') % (junior_first_name, junior_family_name, junior_dob, session['id'])
+                ''' % (junior_first_name, junior_family_name, junior_dob, session['id']))
                 connect.commit()
                 cursor.close()
             elif k == 'junior_dev':
@@ -129,7 +130,7 @@ def success():
                         (first_name, family_name, dob, senior_id, is_developmental)
                     VALUES
                         ('%s', '%s', '%s', '%s', 1)
-                ''') % (junior_first_name, junior_family_name, junior_dob, session['id'])
+                ''' % (junior_first_name, junior_family_name, junior_dob, session['id']))
                 connect.commit()
                 cursor.close()
     return render_template("success.html", datetime=str(datetime.now().year))
