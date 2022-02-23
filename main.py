@@ -67,6 +67,7 @@ def before_first_request_func():
             junior_id INT(6) PRIMARY KEY AUTO_INCREMENT,
             first_name VARCHAR(40) NOT NULL,
             family_name VARCHAR(40) NOT NULL,
+            dob DATE NOT NULL,
             senior_id INT(6),
             FOREIGN KEY (senior_id) REFERENCES seniors(senior_id),
             is_developmental BIT(1) DEFAULT 0
