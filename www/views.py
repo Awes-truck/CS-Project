@@ -22,6 +22,14 @@ connect = sql_connect(
     SQL_DATABASE
 )
 
+price_dict = {
+    'social': ['3', 'price_1KTT07HuaTKPzffSkYKw4EPw', 's'],
+    'senior': ['4', 'price_1KTNDVHuaTKPzffS1ubgGAr7', 's'],
+    'senior_edu': ['5', 'price_1KTS4HHuaTKPzffSsYTpJcNQ', 's'],
+    'junior': [None, 'price_1KTOPyHuaTKPzffS5yvO1LSb', 'j'],
+    'junior_dev': [None, 'price_1KTnk8HuaTKPzffSo8JBgFX2', 'j']
+}
+
 
 @views.route('/')
 def home():
@@ -38,14 +46,6 @@ def subscriptions():
     else:
         port = ':80'
 
-    price_dict = {
-        'senior': 'price_1KTNDVHuaTKPzffS1ubgGAr7',
-        'senior_edu': 'price_1KTS4HHuaTKPzffSsYTpJcNQ',
-        'social': 'price_1KTT07HuaTKPzffSkYKw4EPw',
-        'junior': 'price_1KTOPyHuaTKPzffS5yvO1LSb',
-        'junior_dev': 'price_1KTnk8HuaTKPzffSo8JBgFX2'
-    }
-
     if request.method == "POST":
         if 'loggedin' not in session:
             flash('You must be logged in to make purchases', category='error')
@@ -54,7 +54,7 @@ def subscriptions():
         price_id = None
         for k, v in price_dict.items():
             if request.form.get(k):
-                price_id = v
+                price_id = v[1]
         if price_id is None:
             flash(
                 "There was an error - please contact the system administrator",
@@ -86,9 +86,21 @@ def success():
         return redirect(url_for('views.home'))
     session.pop('stripe_session', None)
 
+    cursor = connect.cursor()
     # check if product is junior or senior
-    product = request.args.get('price_id')
-    # if product ==
+    for k, v in price_dict.items():
+        if v[2] == 's':
+            cursor.execute('''
+                UPDATE seniors
+                SET group_id = %i
+                WHERE price_id = %s
+                ''') % (v[0], v[1])
+            connect.commit()
+            cursor.close()
+        elif v[2] == 'j':
+            cursor.execute('''
+                INSERT INTO juniors
+            ''')
     # if senior, update via session['email'] (user) with new usergroup
     return render_template("success.html", datetime=str(datetime.now().year))
 # @views.route('/index')
