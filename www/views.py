@@ -81,7 +81,6 @@ def subscriptions():
                 session['junior_family_name'] = request.form.get(
                     'junior_family_name')
                 session['junior_dob'] = request.form.get('junior_dob')
-                print(session['junior_dob'])
         return redirect(stripe_session.url, code=303)
     return render_template("subscriptions.html", datetime=str(datetime.now().year))
 
@@ -97,11 +96,9 @@ def success():
     if check_session_exists or check_id_in_args or check_session_query:
         flash("You cannot access this page from here", category='error')
         return redirect(url_for('views.home'))
-    session.pop('stripe_session', None)
 
-    junior_first_name = session['junior_first_name']
-    junior_family_name = session['junior_family_name']
-    junior_dob = session['junior_dob']
+    session.pop('stripe_session', None)
+    id = session['id']
     cursor = connect.cursor()
 
     # check if product is junior or senior
@@ -115,13 +112,17 @@ def success():
             connect.commit()
             cursor.close()
         elif v[2] == 'j' and v[1] == request.args.get('price_id'):
+            junior_first_name = session['junior_first_name']
+            junior_family_name = session['junior_family_name']
+            junior_dob = session['junior_dob']
+
             if k == 'junior':
                 cursor.execute('''
                     INSERT INTO juniors
                         (first_name, family_name, dob, senior_id)
                     VALUES
                         ('%s', '%s', '%s', '%s')
-                ''' % (junior_first_name, junior_family_name, junior_dob, session['id']))
+                ''' % (junior_first_name, junior_family_name, junior_dob, id))
                 connect.commit()
                 cursor.close()
             elif k == 'junior_dev':
@@ -130,25 +131,11 @@ def success():
                         (first_name, family_name, dob, senior_id, is_developmental)
                     VALUES
                         ('%s', '%s', '%s', '%s', 1)
-                ''' % (junior_first_name, junior_family_name, junior_dob, session['id']))
+                ''' % (junior_first_name, junior_family_name, junior_dob, id))
                 connect.commit()
                 cursor.close()
+    session.pop('junior_first_name', None)#
+    session.pop('junior_family_name', None)
+    session.pop('junior_dob', None)
+
     return render_template("success.html", datetime=str(datetime.now().year))
-# @views.route('/index')
-# def index():
-#     return render_template("home.html", datetime=str(datetime.now().year))
-#
-#
-# @views.route('/projects')
-# def projects():
-#   return render_template("projects.html", datetime=str(datetime.now().year))
-#
-#
-# @views.route('/about')
-# def about():
-#     return render_template("about.html", datetime=str(datetime.now().year))
-#
-#
-# @views.route('/contact')
-# def contact():
-#     return render_template("contact.html", datetime=str(datetime.now().year))
