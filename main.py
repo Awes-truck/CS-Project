@@ -41,7 +41,8 @@ def before_first_request_func():
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS usergroups(
             group_id INT(6) PRIMARY KEY AUTO_INCREMENT,
-            description VARCHAR(255) NOT NULL
+            description VARCHAR(255) NOT NULL,
+            price_id VARCHAR(100)
         );
     ''')
     cursor.close()
@@ -75,14 +76,13 @@ def before_first_request_func():
     cursor = connect.cursor()
     cursor.execute('''
         INSERT IGNORE INTO usergroups
-            (group_id, description)
+            (group_id, description, price_id)
         VALUES
-            (1, 'Administrator'),
-            (2, 'General User'),
-            (3, 'Social Member'),
-            (4, 'Senior Member'),
-            (5, 'Senior Member in Full Time Education or Unemployed'),
-            (6, 'Senior Member over 60s')
+            (1, 'Administrator', NULL),
+            (2, 'General User', NULL),
+            (3, 'Social Member', 'price_1KTT07HuaTKPzffSkYKw4EPw'),
+            (4, 'Senior Member', 'price_1KTNDVHuaTKPzffS1ubgGAr7'),
+            (5, 'Senior Member in Full Time Education or Unemployed', 'price_1KTS4HHuaTKPzffSsYTpJcNQ')
     ''')
     connect.commit()
     cursor.close()
