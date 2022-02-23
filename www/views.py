@@ -74,6 +74,11 @@ def subscriptions():
             cancel_url='http://%s%s/subscriptions' % (hostname, port)
         )
         session['stripe_session'] = stripe_session.id
+
+        # for loop to check if the purchase is junior or not
+        session['junior_first_name'] = request.form.get('junior_first_name')
+        session['junior_family_name'] = request.form.get('junior_family_name')
+        session['junior_dob'] = request.form.get('junior_dob')
         return redirect(stripe_session.url, code=303)
     return render_template("subscriptions.html", datetime=str(datetime.now().year))
 
@@ -87,21 +92,24 @@ def success():
     session.pop('stripe_session', None)
 
     cursor = connect.cursor()
+
     # check if product is junior or senior
     for k, v in price_dict.items():
         if v[2] == 's':
             cursor.execute('''
                 UPDATE seniors
                 SET group_id = %s
-                WHERE price_id = %s
-                ''') % (v[0], v[1])
+                WHERE email = %s
+            ''') % (v[0], session['email'])
             connect.commit()
             cursor.close()
         elif v[2] == 'j':
             cursor.execute('''
                 INSERT INTO juniors
-            ''')
-    # if senior, update via session['email'] (user) with new usergroup
+                    (first_name, family_name, dob, is_developmental)
+                VALUES
+                    (%s, %s, %s, %s)
+            ''') % (session['junior_first_name'], session['junior_family_name'])
     return render_template("success.html", datetime=str(datetime.now().year))
 # @views.route('/index')
 # def index():

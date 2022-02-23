@@ -47,6 +47,40 @@
                 </div>
                 <div class='modal-body'>
                     <form name='junior' method="POST">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="control-label" for="junior_first_name">Child's First Name</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="junior_first_name"
+                                    name="junior_first_name"
+                                    placeholder="Enter your Child's First Name..."
+                                />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="control-label" for="junior_family_name">Child's Family Name</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="junior_family_name"
+                                    name="junior_family_name"
+                                    placeholder="Enter your Child's Surname..."
+                                />
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class="col-md-6">
+                                <label class="control-label" for="junior_dob">Child's Date of Birth</label>
+                                <input
+                                    type="date"
+                                    class="form-control"
+                                    id="junior_dob"
+                                    name="junior_dob"
+                                    placeholder="Date of Birth..."
+                                />
+                            </div>
+                        </div>
                         <input type="hidden" id="junior" name="junior" value="junior">
                         <button id='checkout' class="btn btn-primary" type="submit">Checkout</button>
                     </form>
