@@ -3,6 +3,7 @@ from flask import request
 from urllib.parse import urlparse
 from datetime import timedelta
 import os
+import time
 
 app = create_app()
 
@@ -30,26 +31,17 @@ def before_first_request_func():
     )
 
     cursor = connect.cursor()
-    cursor.execute('''CREATE DATABASE IF NOT EXISTS awestruck''')
+    cursor.execute('CREATE DATABASE IF NOT EXISTS awestruck')
     connect.commit()
-    connect.close()
+    cursor.close()
 
-    SQL_DATABASE = os.getenv("SQL_DATABASE")
-
-    connect = sql_connect(
-        SQL_HOST,
-        SQL_PORT,
-        SQL_USER,
-        SQL_PASSWORD,
-        SQL_DATABASE
-    )
+    connect.select_db(os.getenv("SQL_DATABASE"))
 
     cursor = connect.cursor()
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS usergroups(
             group_id INT(6) PRIMARY KEY AUTO_INCREMENT,
-            name VARCHAR(30) NOT NULL,
-            description VARCHAR(255)
+            description VARCHAR(255) NOT NULL
         );
     ''')
     cursor.close()
@@ -78,6 +70,19 @@ def before_first_request_func():
             FOREIGN KEY (senior_id) REFERENCES seniors(senior_id),
             is_developmental BIT(1) DEFAULT 0
         );
+    ''')
+    cursor.close()
+    cursor = connect.cursor()
+    cursor.execute('''
+        INSERT IGNORE INTO usergroups
+            (group_id, description)
+        VALUES
+            (1, 'Administrator'),
+            (2, 'General User'),
+            (3, 'Social Member'),
+            (4, 'Senior Member'),
+            (5, 'Senior Member in Full Time Education or Unemployed'),
+            (6, 'Senior Member over 60s')
     ''')
     connect.commit()
     cursor.close()
