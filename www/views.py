@@ -74,7 +74,7 @@ def subscriptions():
                     flash('Family Name must be greater than 3 characters',
                           category='error')
                     break
-                elif birthdate == '0000-00-00':
+                elif birthdate == '':
                     flash('Please insert a Date of Birth', category='error')
                     break
                 elif birthdate > str(datetime.now()):
@@ -103,7 +103,7 @@ def subscriptions():
                     session['stripe_session'] = stripe_session.id
 
                     return redirect(stripe_session.url, code=303)
-    return render_template("subscriptions.html", datetime=str(datetime.now().year), now=datetime.now().strftime("%Y-%m-%d"))
+    return render_template("subscriptions.html", datetime=str(datetime.now().year))
 
 
 @views.route('/success')
