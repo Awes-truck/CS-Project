@@ -92,7 +92,7 @@ def success():
         if v[2] == 's':
             cursor.execute('''
                 UPDATE seniors
-                SET group_id = %i
+                SET group_id = %s
                 WHERE price_id = %s
                 ''') % (v[0], v[1])
             connect.commit()
