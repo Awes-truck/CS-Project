@@ -74,11 +74,13 @@ def subscriptions():
             cancel_url='http://%s%s/subscriptions' % (hostname, port)
         )
         session['stripe_session'] = stripe_session.id
-
-        # for loop to check if the purchase is junior or not
-        session['junior_first_name'] = request.form.get('junior_first_name')
-        session['junior_family_name'] = request.form.get('junior_family_name')
-        session['junior_dob'] = request.form.get('junior_dob')
+        for k, v in price_dict.items():
+            if v[2] == 'j' and v[1] == price_id:
+                session['junior_first_name'] = request.form.get(
+                    'junior_first_name')
+                session['junior_family_name'] = request.form.get(
+                    'junior_family_name')
+                session['junior_dob'] = request.form.get('junior_dob')
         return redirect(stripe_session.url, code=303)
     return render_template("subscriptions.html", datetime=str(datetime.now().year))
 
@@ -86,30 +88,50 @@ def subscriptions():
 @views.route('/success')
 @login_required
 def success():
-    if 'stripe_session' not in session or 'session_id' not in request.args or session['stripe_session'] != request.args.get('session_id'):
+    check_session_exists = 'stripe_session' not in session
+    check_id_in_args = 'session_id' not in request.args
+    check_session_query = session['stripe_session'] != request.args.get(
+        'session_id')
+
+    if check_session_exists or check_id_in_args or check_session_query:
         flash("You cannot access this page from here", category='error')
         return redirect(url_for('views.home'))
     session.pop('stripe_session', None)
 
+    junior_first_name = session['junior_first_name']
+    junior_family_name = session['junior_family_name']
+    junior_dob = session['junior_dob']
     cursor = connect.cursor()
 
     # check if product is junior or senior
     for k, v in price_dict.items():
-        if v[2] == 's':
+        if v[2] == 's' and v[1] == request.args.get('price_id'):
             cursor.execute('''
                 UPDATE seniors
                 SET group_id = %s
-                WHERE email = %s
-            ''') % (v[0], session['email'])
+                WHERE senior_id = %s
+            ''') % (v[0], session['id'])
             connect.commit()
             cursor.close()
-        elif v[2] == 'j':
-            cursor.execute('''
-                INSERT INTO juniors
-                    (first_name, family_name, dob, is_developmental)
-                VALUES
-                    (%s, %s, %s, %s)
-            ''') % (session['junior_first_name'], session['junior_family_name'])
+        elif v[2] == 'j' and v[1] == request.args.get('price_id'):
+            if k == 'junior':
+                cursor.execute('''
+                    INSERT INTO juniors
+                        (first_name, family_name, dob, senior_id)
+                    VALUES
+                        ('%s', '%s', '%s', '%s')
+                ''') % (junior_first_name, junior_family_name, junior_dob, session['id'])
+                connect.commit()
+                cursor.close()
+            elif k == 'junior_dev':
+                cursor.execute('''
+                    INSERT INTO juniors
+                        (first_name, family_name, dob, senior_id, is_developmental)
+                    VALUES
+                        ('%s', '%s', '%s', '%s', 1)
+                ''') % (junior_first_name, junior_family_name, junior_dob, session['id'])
+                connect.commit()
+                cursor.close()
     return render_template("success.html", datetime=str(datetime.now().year))
 # @views.route('/index')
 # def index():

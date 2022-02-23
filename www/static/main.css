@@ -88,7 +88,7 @@ a {
 
 .modal-header {
   padding: 2px 16px;
-  background-color: #5cb85c;
+  background-color: var(--success);
   color: white;
 }
 
@@ -98,7 +98,7 @@ a {
 /* Modal Footer */
 .modal-footer {
   padding: 2px 16px;
-  background-color: #5cb85c;
+  background-color: var(--success);
   color: white;
 }
 
@@ -109,10 +109,15 @@ a {
   margin: 20% auto;
   padding: 0;
   border: 1px solid #888;
-  width: 80%;
+  width: 50%;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
   animation-name: animatetop;
   animation-duration: 0.4s
+}
+
+.modal-body button{
+	float: right;
+	margin-bottom: 5px;
 }
 
 .close {
