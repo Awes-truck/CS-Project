@@ -51,33 +51,15 @@ def subscriptions():
             flash('You must be logged in to make purchases', category='error')
             return redirect(url_for('auth.login'))
 
+        price_id = None
         for k, v in price_dict.items():
             if request.form.get(k):
                 price_id = v
-                break
-            elif request.form.get(k) is None:
-                continue
-            else:
-                flash(
-                    "There was an error - please contact the system administrator",
-                    category='error')
-                return redirect(url_for('views.home'))
-
-        # if request.form.get('senior'):
-        #     price_id = 'price_1KTNDVHuaTKPzffS1ubgGAr7'
-        # elif request.form.get('senior_edu'):
-        #     price_id = 'price_1KTS4HHuaTKPzffSsYTpJcNQ'
-        # elif request.form.get('social'):
-        #     price_id = 'price_1KTT07HuaTKPzffSkYKw4EPw'
-        # elif request.form.get('junior'):
-        #     price_id = 'price_1KTOPyHuaTKPzffS5yvO1LSb'
-        # elif request.form.get('junior_dev'):
-        #     price_id = 'price_1KTnk8HuaTKPzffSo8JBgFX2'
-        # else:
-        #     flash(
-        #         "There was an error - please contact the system administrator",
-        #         category='error')
-        #     return redirect(url_for('views.home'))
+        if price_id is None:
+            flash(
+                "There was an error - please contact the system administrator",
+                category='error')
+            return redirect(url_for('views.home'))
 
         stripe_session = stripe.checkout.Session.create(
             customer_email=session['email'],
