@@ -106,9 +106,9 @@ def success():
         if v[2] == 's' and v[1] == request.args.get('price_id'):
             cursor.execute('''
                 UPDATE seniors
-                SET group_id = %s
-                WHERE senior_id = %s
-            ''') % (v[0], session['id'])
+                SET group_id = '%s'
+                WHERE senior_id = '%s'
+            ''' % (v[0], session['id']))
             connect.commit()
             cursor.close()
         elif v[2] == 'j' and v[1] == request.args.get('price_id'):
@@ -134,7 +134,7 @@ def success():
                 ''' % (junior_first_name, junior_family_name, junior_dob, id))
                 connect.commit()
                 cursor.close()
-    session.pop('junior_first_name', None)#
+    session.pop('junior_first_name', None)
     session.pop('junior_family_name', None)
     session.pop('junior_dob', None)
 
