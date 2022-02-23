@@ -61,28 +61,49 @@ def subscriptions():
                 category='error')
             return redirect(url_for('views.home'))
 
-        stripe_session = stripe.checkout.Session.create(
-            customer_email=session['email'],
-            line_items=[{
-                'price': price_id,
-                'quantity': 1
-            }],
-            metadata={'user_id': session['id']},
-            mode='subscription',
-            success_url='http://%s%s/success?session_id={CHECKOUT_SESSION_ID}&price_id=%s' %
-            (hostname, port, price_id),
-            cancel_url='http://%s%s/subscriptions' % (hostname, port)
-        )
-        session['stripe_session'] = stripe_session.id
         for k, v in price_dict.items():
             if v[2] == 'j' and v[1] == price_id:
-                session['junior_first_name'] = request.form.get(
-                    'junior_first_name')
-                session['junior_family_name'] = request.form.get(
-                    'junior_family_name')
-                session['junior_dob'] = request.form.get('junior_dob')
-        return redirect(stripe_session.url, code=303)
-    return render_template("subscriptions.html", datetime=str(datetime.now().year))
+                first_name = request.form.get('junior_first_name')
+                family_name = request.form.get('junior_family_name')
+                birthdate = request.form.get('junior_dob')
+                if len(first_name) < 4:
+                    flash('First Name must be greater than 3 characters',
+                          category='error')
+                    break
+                elif len(family_name) < 4:
+                    flash('Family Name must be greater than 3 characters',
+                          category='error')
+                    break
+                elif birthdate == '0000-00-00':
+                    flash('Please insert a Date of Birth', category='error')
+                    break
+                elif birthdate > str(datetime.now()):
+                    flash('Date cannot be in the future', category='error')
+                    break
+                else:
+                    session['junior_first_name'] = request.form.get(
+                        'junior_first_name')
+                    session['junior_family_name'] = request.form.get(
+                        'junior_family_name')
+                    session['junior_dob'] = request.form.get('junior_dob')
+                    print(session['junior_dob'])
+                    stripe_session = stripe.checkout.Session.create(
+                        customer_email=session['email'],
+                        line_items=[{
+                            'price': price_id,
+                            'quantity': 1
+                        }],
+                        metadata={'user_id': session['id']},
+                        mode='subscription',
+                        success_url='http://%s%s/success?session_id={CHECKOUT_SESSION_ID}&price_id=%s'
+                        % (hostname, port, price_id),
+                        cancel_url='http://%s%s/subscriptions'
+                        % (hostname, port)
+                    )
+                    session['stripe_session'] = stripe_session.id
+
+                    return redirect(stripe_session.url, code=303)
+    return render_template("subscriptions.html", datetime=str(datetime.now().year), now=datetime.now().strftime("%Y-%m-%d"))
 
 
 @views.route('/success')
@@ -134,8 +155,8 @@ def success():
                 ''' % (junior_first_name, junior_family_name, junior_dob, id))
                 connect.commit()
                 cursor.close()
-    session.pop('junior_first_name', None)
-    session.pop('junior_family_name', None)
-    session.pop('junior_dob', None)
+            session.pop('junior_first_name', None)
+            session.pop('junior_family_name', None)
+            session.pop('junior_dob', None)
 
     return render_template("success.html", datetime=str(datetime.now().year))
