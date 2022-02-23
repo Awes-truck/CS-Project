@@ -5,7 +5,7 @@
         <div class="product-container">
             <ul class='product-card'>
                 <li class='name'>Senior Member</li>
-                <li class='short_desc'>-</li>
+                <li class='short_desc'>*social membership included=</li>
                 <li class='price'>£180.00</li>
                 <li>
                     <form name='senior' method="POST">
@@ -39,29 +39,45 @@
         </div>
     </div>
     <div class='juniors'>
+        <div class="modal">
+            <div class="modal-content">
+                <div class='modal-header'>
+                    <h2>Junior Subscription</h2>
+                    <span class="close">&times;</span>
+                </div>
+                <div class='modal-body'>
+                    <form name='junior' method="POST">
+                        <input type="hidden" id="junior" name="junior" value="junior">
+                        <button id='checkout' class="btn btn-primary" type="submit">Checkout</button>
+                    </form>
+                </div>
+                <div class='modal-footer'>
+                    <h3>Test</h3>
+                </div>
+            </div>
+        </div>
+        <div class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <form name='junior_dev' method="POST">
+                    <input type="hidden" id="junior_dev" name="junior_dev" value="junior_dev">
+                    <button id='checkout' class="btn btn-primary" type="submit">Checkout</button>
+                </form>
+            </div>
+        </div>
         <h1>Junior Subscriptions</h1>
         <div class="product-container">
             <ul class='product-card'>
                 <li class='name'>Junior Member</li>
                 <li class='short_desc'>*social membership included</li>
                 <li class='price'>£135.00</li>
-                <li>
-                    <form name='junior' method="POST">
-                        <input type="hidden" id="junior" name="junior" value="junior">
-                        <button id='checkout' class="btn btn-primary" type="submit">Checkout</button>
-                    </form>
-                </li>
+                <li><button class="btn btn-primary openmodal">Options</button></li>
             </ul>
             <ul class='product-card'>
                 <li class='name'>Junior Member (up to 7/8 years old)</li>
                 <li class='short_desc'>*social membership included</li>
                 <li class='price'>£80.00</li>
-                <li>
-                    <form name='junior_dev' method="POST">
-                        <input type="hidden" id="junior_dev" name="junior_dev" value="junior_dev">
-                        <button id='checkout' class="btn btn-primary" type="submit">Checkout</button>
-                    </form>
-                </li>
+                <li><button class="btn btn-primary openmodal">Options</button></li>
             </ul>
         </div>
     </div>
