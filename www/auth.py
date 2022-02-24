@@ -126,14 +126,16 @@ def register():
             password_hash = generate_password_hash(password, method='sha256')
             cursor = connect.cursor()
             cursor.execute(
-                '''INSERT INTO seniors (first_name, family_name, email, password, address, phone_number)
-                VALUES ('%s', '%s', '%s', '%s', '%s', '%s')'''
+                '''INSERT INTO seniors (first_name, family_name, email, password, address, phone_number, group_id)
+                VALUES ('%s', '%s', '%s', '%s', '%s', '%s', 2)'''
                 % (first_name, family_name, email, password_hash, full_address, phone_number))
+
+            user_id = str(cursor.lastrowid)
             connect.commit()
             cursor.close()
             flash('Account successfully created!', category='success')
             stripe.Customer.create(
-                description=" ",
+                description="User ID: " + user_id,
                 address={
                     'line1': request.form.get(postal_keys[0]),
                     'city': request.form.get(postal_keys[1]),
@@ -144,6 +146,7 @@ def register():
                 email=email,
                 phone=phone_number
             )
+
             email_exists = False
             return redirect(url_for('views.home'))
 
