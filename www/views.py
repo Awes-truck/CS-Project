@@ -158,5 +158,5 @@ def success():
             session.pop('junior_first_name', None)
             session.pop('junior_family_name', None)
             session.pop('junior_dob', None)
-        return redirect(url_for('views.home'))
+
     return render_template("success.html", datetime=str(datetime.now().year))
