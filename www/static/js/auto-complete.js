@@ -37,6 +37,10 @@ var placeSearch, autocomplete;
             document.getElementById(addressType).value = val;
           }
         }
+        document.getElementById('address1').value =
+            place.address_components[0]['long_name'] + ' ' +
+            place.address_components[1]['long_name'];
+        document.getElementById('address1').disabled = false;
       }
 
       // Bias the autocomplete object to the user's geographical location,

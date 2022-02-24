@@ -76,28 +76,28 @@
             </div>
             <div class="panel-body">
                 <input id="autocomplete" placeholder="Enter your address (auto-complete)" onFocus="geolocate()" type="text" class="form-control">
+                <input type="hidden" class="field" id="street_number" disabled="true"></input>
+                <input type="hidden" class="field" id="route" disabled="true"></input>
                 <div id="address">
                     <div class="row">
                         <div class="col-md-6">
                             <label class="control-label">Address Line 1 <span class='required'>*</span></label>
-                            <input class="form-control" name="street_number" id="street_number" disabled="true">
+                            <input class="form-control" name="address1" id="address1" disabled="false">
                         </div>
                         <div class="col-md-6">
-                            <label class="control-label">Address Line 2 <span class='required'>*</span></label>
-                            <input class="form-control" name="route" id="route" disabled="true">
+                            <label class="control-label">County <span class='required'>*</span></label>
+                            <input class="form-control" name="administrative_area_level_2" id="administrative_area_level_2" disabled="true">
                         </div>
+                        <!-- <div class="col-md-6">
+                            <label class="control-label">Address Line 2 </label>
+                            <input class="form-control route" name="route" id="route" disabled="false">
+                        </div> -->
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <label class="control-label">City / Town <span class='required'>*</span></label>
                             <input class="form-control field" name="postal_town" id="postal_town" disabled="true">
                         </div>
-                        <div class="col-md-6">
-                            <label class="control-label">County <span class='required'>*</span></label>
-                            <input class="form-control" name="administrative_area_level_2" id="administrative_area_level_2" disabled="true">
-                        </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-6">
                             <label class="control-label">Postal Code <span class='required'>*</span></label>
                             <input class="form-control" name="postal_code" id="postal_code" disabled="true">

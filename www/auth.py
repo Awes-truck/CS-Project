@@ -74,8 +74,7 @@ def register():
         return redirect(url_for('views.home'))
 
     postal_keys = [
-        'street_number',
-        'route',
+        'address1',
         'postal_town',
         'administrative_area_level_2',
         'postal_code'
@@ -108,7 +107,6 @@ def register():
                 full_address_list.append(str(request.form.get(i)))
         if full_address_complete:
             full_address = separator.join(full_address_list)
-            print(full_address)
 
         if len(email) < 4:
             flash('Email must be greater 3 characters', category='error')
@@ -138,16 +136,15 @@ def register():
                 description=" ",
                 address={
                     'line1': request.form.get(postal_keys[0]),
-                    'line2': request.form.get(postal_keys[1]),
-                    'city': request.form.get(postal_keys[2]),
-                    'state': request.form.get(postal_keys[3]),
-                    'postal_code': request.form.get(postal_keys[4])
+                    'city': request.form.get(postal_keys[1]),
+                    'state': request.form.get(postal_keys[2]),
+                    'postal_code': request.form.get(postal_keys[3])
                 },
                 name=" ".join([first_name, family_name]),
                 email=email,
                 phone=phone_number
             )
-
+            email_exists = False
             return redirect(url_for('views.home'))
 
     return render_template("register.html",  datetime=str(datetime.now().year))
