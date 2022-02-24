@@ -61,6 +61,21 @@ def subscriptions():
                 category='error')
             return redirect(url_for('views.home'))
 
+        stripe_session = stripe.checkout.Session.create(
+            customer_email=session['email'],
+            line_items=[{
+                'price': price_id,
+                'quantity': 1
+            }],
+            metadata={'user_id': session['id']},
+            mode='subscription',
+            success_url='http://%s%s/success?session_id={CHECKOUT_SESSION_ID}&price_id=%s'
+            % (hostname, port, price_id),
+            cancel_url='http://%s%s/subscriptions'
+            % (hostname, port)
+        )
+        session['stripe_session'] = stripe_session.id
+
         for k, v in price_dict.items():
             if v[2] == 'j' and v[1] == price_id:
                 first_name = request.form.get('junior_first_name')
@@ -86,23 +101,8 @@ def subscriptions():
                     session['junior_family_name'] = request.form.get(
                         'junior_family_name')
                     session['junior_dob'] = request.form.get('junior_dob')
-                    print(session['junior_dob'])
-                    stripe_session = stripe.checkout.Session.create(
-                        customer_email=session['email'],
-                        line_items=[{
-                            'price': price_id,
-                            'quantity': 1
-                        }],
-                        metadata={'user_id': session['id']},
-                        mode='subscription',
-                        success_url='http://%s%s/success?session_id={CHECKOUT_SESSION_ID}&price_id=%s'
-                        % (hostname, port, price_id),
-                        cancel_url='http://%s%s/subscriptions'
-                        % (hostname, port)
-                    )
-                    session['stripe_session'] = stripe_session.id
 
-                    return redirect(stripe_session.url, code=303)
+        return redirect(stripe_session.url, code=303)
     return render_template("subscriptions.html", datetime=str(datetime.now().year))
 
 
@@ -158,5 +158,5 @@ def success():
             session.pop('junior_first_name', None)
             session.pop('junior_family_name', None)
             session.pop('junior_dob', None)
-
+        return redirect(url_for('views.home'))
     return render_template("success.html", datetime=str(datetime.now().year))
