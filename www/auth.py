@@ -14,7 +14,7 @@ SQL_PASSWORD = os.getenv("SQL_PASSWORD")
 SQL_DATABASE = os.getenv("SQL_DATABASE")
 stripe.api_key = os.getenv("STRIPE_API_TEST_SK")
 
-connect = sql_connect(
+CONNECT = sql_connect(
     SQL_HOST,
     SQL_PORT,
     SQL_USER,
@@ -33,7 +33,7 @@ def login():
         email = request.form.get('email')
         password = request.form.get('password')
 
-        cursor = connect.cursor()
+        cursor = CONNECT.cursor()
         user = cursor.execute(
             '''SELECT senior_id, password, first_name FROM seniors WHERE email='%s' '''
             % email
@@ -92,7 +92,7 @@ def register():
         password_confirm = request.form.get('password_confirm')
         phone_number = request.form.get('phone')
 
-        cursor = connect.cursor()
+        cursor = CONNECT.cursor()
         query = cursor.execute(
             '''SELECT email FROM seniors WHERE email = '%s' ''' % email)
         if query != 0:
@@ -124,14 +124,14 @@ def register():
             flash('Address must not have empty fields', category='error')
         else:
             password_hash = generate_password_hash(password, method='sha256')
-            cursor = connect.cursor()
+            cursor = CONNECT.cursor()
             cursor.execute(
                 '''INSERT INTO seniors (first_name, family_name, email, password, address, phone_number, group_id)
                 VALUES ('%s', '%s', '%s', '%s', '%s', '%s', 2)'''
                 % (first_name, family_name, email, password_hash, full_address, phone_number))
 
             user_id = str(cursor.lastrowid)
-            connect.commit()
+            CONNECT.commit()
             cursor.close()
             flash('Account successfully created!', category='success')
             stripe.Customer.create(
