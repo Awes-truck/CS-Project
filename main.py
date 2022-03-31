@@ -3,7 +3,7 @@ from flask import request
 from urllib.parse import urlparse
 from datetime import timedelta
 import os
-import time
+
 
 app = create_app()
 
