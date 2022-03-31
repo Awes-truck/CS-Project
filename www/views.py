@@ -3,18 +3,23 @@ from datetime import datetime
 from urllib.parse import urlparse
 from .__init__ import sql_connect, login_required
 import stripe
+import vonage
+from textmagic.rest import TextmagicRestClient
 import os
 
 views = Blueprint('views', __name__)
 
+DATETIME = str(datetime.now().year)
 SQL_HOST = os.getenv("SQL_HOST")
 SQL_PORT = int(os.getenv("SQL_PORT"))
 SQL_USER = os.getenv("SQL_USER")
 SQL_PASSWORD = os.getenv("SQL_PASSWORD")
 SQL_DATABASE = os.getenv("SQL_DATABASE")
 stripe.api_key = os.getenv('STRIPE_API_TEST_SK')
+TEXTMAGIC_USERNAME = os.getenv('TEXTMAGIC_USERNAME')
+TEXTMAGIC_API_KEY = os.getenv('TEXTMAGIC_API_KEY')
 
-connect = sql_connect(
+CONNECT = sql_connect(
     SQL_HOST,
     SQL_PORT,
     SQL_USER,
@@ -23,17 +28,17 @@ connect = sql_connect(
 )
 
 price_dict = {
-    'social': ['3', 'price_1KTT07HuaTKPzffSkYKw4EPw', 's'],
-    'senior': ['4', 'price_1KTNDVHuaTKPzffS1ubgGAr7', 's'],
-    'senior_edu': ['5', 'price_1KTS4HHuaTKPzffSsYTpJcNQ', 's'],
-    'junior': [None, 'price_1KTOPyHuaTKPzffS5yvO1LSb', 'j'],
-    'junior_dev': [None, 'price_1KTnk8HuaTKPzffSo8JBgFX2', 'j']
+    'social': ['3', 'price_1KTT07HuaTKPzffSkYKw4EPw', 'senior_flag'],
+    'senior': ['4', 'price_1KTNDVHuaTKPzffS1ubgGAr7', 'senior_flag'],
+    'senior_edu': ['5', 'price_1KTS4HHuaTKPzffSsYTpJcNQ', 'senior_flag'],
+    'junior': [None, 'price_1KTOPyHuaTKPzffS5yvO1LSb', 'junior_flag'],
+    'junior_dev': [None, 'price_1KTnk8HuaTKPzffSo8JBgFX2', 'junior_flag']
 }
 
 
 @views.route('/')
 def home():
-    return render_template("home.html", datetime=str(datetime.now().year))
+    return render_template("home.html", DATETIME)
 
 
 @views.route('/subscriptions', methods=['GET', 'POST'])
@@ -103,7 +108,7 @@ def subscriptions():
                     session['junior_dob'] = request.form.get('junior_dob')
 
         return redirect(stripe_session.url, code=303)
-    return render_template("subscriptions.html", datetime=str(datetime.now().year))
+    return render_template("subscriptions.html", DATETIME)
 
 
 @views.route('/success')
@@ -118,21 +123,36 @@ def success():
         flash("You cannot access this page from here", category='error')
         return redirect(url_for('views.home'))
 
+    item = stripe.checkout.Session.list_line_items(session['stripe_session'])
+    product = item.data[0].price.product
+    product = stripe.Product.retrieve(product).name
+    price = item.data[0].price.id
+    price = stripe.Price.retrieve(price).unit_amount
+
+    print(product)
+    print(price)
     session.pop('stripe_session', None)
     id = session['id']
-    cursor = connect.cursor()
+    name = session['name']
 
-    # check if product is junior or senior
+    if 'phone' in session:
+        client = TextmagicRestClient(TEXTMAGIC_USERNAME, TEXTMAGIC_API_KEY)
+        client.messages.create(
+            phones=session['phone'],
+            text=f"Hi, {name}. Your purchase of '{product}' for £{price} was successful!"
+        )
+
+    cursor = CONNECT.cursor()
     for k, v in price_dict.items():
-        if v[2] == 's' and v[1] == request.args.get('price_id'):
+        if v[2] == 'senior_flag' and v[1] == request.args.get('price_id'):
             cursor.execute('''
                 UPDATE seniors
                 SET group_id = '%s'
                 WHERE senior_id = '%s'
             ''' % (v[0], session['id']))
-            connect.commit()
+            CONNECT.commit()
             cursor.close()
-        elif v[2] == 'j' and v[1] == request.args.get('price_id'):
+        elif v[2] == 'junior_flag' and v[1] == request.args.get('price_id'):
             junior_first_name = session['junior_first_name']
             junior_family_name = session['junior_family_name']
             junior_dob = session['junior_dob']
@@ -144,7 +164,7 @@ def success():
                     VALUES
                         ('%s', '%s', '%s', '%s')
                 ''' % (junior_first_name, junior_family_name, junior_dob, id))
-                connect.commit()
+                CONNECT.commit()
                 cursor.close()
             elif k == 'junior_dev':
                 cursor.execute('''
@@ -153,10 +173,10 @@ def success():
                     VALUES
                         ('%s', '%s', '%s', '%s', 1)
                 ''' % (junior_first_name, junior_family_name, junior_dob, id))
-                connect.commit()
+                CONNECT.commit()
                 cursor.close()
             session.pop('junior_first_name', None)
             session.pop('junior_family_name', None)
             session.pop('junior_dob', None)
 
-    return render_template("success.html", datetime=str(datetime.now().year))
+    return render_template("success.html", DATETIME)

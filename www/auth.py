@@ -7,6 +7,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 auth = Blueprint('auth', __name__)
 
+DATETIME = str(datetime.now().year)
 SQL_HOST = os.getenv("SQL_HOST")
 SQL_PORT = int(os.getenv("SQL_PORT"))
 SQL_USER = os.getenv("SQL_USER")
@@ -34,30 +35,34 @@ def login():
         password = request.form.get('password')
 
         cursor = CONNECT.cursor()
-        user = cursor.execute(
-            '''SELECT senior_id, password, first_name FROM seniors WHERE email='%s' '''
+        cursor.execute(
+            '''SELECT senior_id, password, first_name, phone_number FROM seniors WHERE email='%s' '''
             % email
         )
         user = cursor.fetchone()
         cursor.close()
         if user:
-            # Not used, but still needs to be declared to work for some reason
             user_id = user[0]
             user_password_hash = user[1]
             user_name = user[2]
+            phone_number = user[3]
+
             if check_password_hash(user_password_hash, password):
                 session.permanent = True
                 session['loggedin'] = True
                 session['email'] = email
                 session['name'] = user_name
                 session['id'] = user_id
+                if not phone_number == '':
+                    session['phone'] = phone_number
+                print(type(session['phone']))
                 flash('Logged in Successfully!', category='success')
                 return redirect(url_for('views.home'))
             else:
                 flash('Incorrect password. Please try again!', category='error')
         else:
             flash('Incorrect email. Please try again!', category='error')
-    return render_template("login.html",  datetime=str(datetime.now().year))
+    return render_template("login.html", DATETIME)
 
 
 @auth.route('/logout')
@@ -90,8 +95,10 @@ def register():
         family_name = request.form.get('family_name')
         password = request.form.get('password')
         password_confirm = request.form.get('password_confirm')
-        phone_number = request.form.get('phone')
-
+        if request.form.get('phone') == '':
+            phone_number = None
+        else:
+            phone_number = request.form.get('phone')
         cursor = CONNECT.cursor()
         query = cursor.execute(
             '''SELECT email FROM seniors WHERE email = '%s' ''' % email)
@@ -150,4 +157,4 @@ def register():
             email_exists = False
             return redirect(url_for('views.home'))
 
-    return render_template("register.html",  datetime=str(datetime.now().year))
+    return render_template("register.html", DATETIME)
