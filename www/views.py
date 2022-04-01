@@ -9,7 +9,6 @@ import os
 
 views = Blueprint('views', __name__)
 
-DATETIME = str(datetime.now().year)
 SQL_HOST = os.getenv("SQL_HOST")
 SQL_PORT = int(os.getenv("SQL_PORT"))
 SQL_USER = os.getenv("SQL_USER")
@@ -38,7 +37,7 @@ price_dict = {
 
 @views.route('/')
 def home():
-    return render_template("home.html", DATETIME)
+    return render_template("home.html", DATETIME=str(datetime.now().year))
 
 
 @views.route('/subscriptions', methods=['GET', 'POST'])
@@ -108,7 +107,7 @@ def subscriptions():
                     session['junior_dob'] = request.form.get('junior_dob')
 
         return redirect(stripe_session.url, code=303)
-    return render_template("subscriptions.html", DATETIME)
+    return render_template("subscriptions.html", DATETIME=str(datetime.now().year))
 
 
 @views.route('/success')
@@ -128,19 +127,23 @@ def success():
     product = stripe.Product.retrieve(product).name
     price = item.data[0].price.id
     price = stripe.Price.retrieve(price).unit_amount
+    format(price / 100, '.02f')
 
-    print(product)
-    print(price)
     session.pop('stripe_session', None)
     id = session['id']
     name = session['name']
 
     if 'phone' in session:
-        client = TextmagicRestClient(TEXTMAGIC_USERNAME, TEXTMAGIC_API_KEY)
-        client.messages.create(
-            phones=session['phone'],
-            text=f"Hi, {name}. Your purchase of '{product}' for £{price} was successful!"
-        )
+        try:
+            phone = session['phone'].replace('+', '')
+            print(phone)
+            client = TextmagicRestClient(TEXTMAGIC_USERNAME, TEXTMAGIC_API_KEY)
+            client.messages.create(
+                phones=phone,
+                text=f"Hi, {name}. Your purchase of '{product}' for £{price} was successful!"
+            )
+        except:
+            pass
 
     cursor = CONNECT.cursor()
     for k, v in price_dict.items():
@@ -179,4 +182,4 @@ def success():
             session.pop('junior_family_name', None)
             session.pop('junior_dob', None)
 
-    return render_template("success.html", DATETIME)
+    return render_template("success.html", DATETIME=str(datetime.now().year))
