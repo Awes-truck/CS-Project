@@ -7,7 +7,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 auth = Blueprint('auth', __name__)
 
-DATETIME = str(datetime.now().year)
 SQL_HOST = os.getenv("SQL_HOST")
 SQL_PORT = int(os.getenv("SQL_PORT"))
 SQL_USER = os.getenv("SQL_USER")
@@ -53,16 +52,15 @@ def login():
                 session['email'] = email
                 session['name'] = user_name
                 session['id'] = user_id
-                if not phone_number == '':
+                if phone_number is not None:
                     session['phone'] = phone_number
-                print(type(session['phone']))
                 flash('Logged in Successfully!', category='success')
                 return redirect(url_for('views.home'))
             else:
                 flash('Incorrect password. Please try again!', category='error')
         else:
             flash('Incorrect email. Please try again!', category='error')
-    return render_template("login.html", DATETIME)
+    return render_template("login.html", DATETIME=str(datetime.now().year))
 
 
 @auth.route('/logout')
@@ -95,10 +93,10 @@ def register():
         family_name = request.form.get('family_name')
         password = request.form.get('password')
         password_confirm = request.form.get('password_confirm')
-        if request.form.get('phone') == '':
-            phone_number = None
-        else:
+        if request.form.get('phone') is not None:
             phone_number = request.form.get('phone')
+        else:
+            phone_number = "NULL"
         cursor = CONNECT.cursor()
         query = cursor.execute(
             '''SELECT email FROM seniors WHERE email = '%s' ''' % email)
@@ -107,7 +105,7 @@ def register():
         cursor.close()
 
         for i in postal_keys:
-            if str(request.form.get(i)) == "":
+            if request.form.get(i) is None:
                 full_address_complete = False
                 break
             else:
@@ -154,7 +152,6 @@ def register():
                 phone=phone_number
             )
 
-            email_exists = False
             return redirect(url_for('views.home'))
 
-    return render_template("register.html", DATETIME)
+    return render_template("register.html", DATETIME=str(datetime.now().year))
