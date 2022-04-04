@@ -14,6 +14,8 @@ app.permanent_session_lifetime = timedelta(days=7)
 Before the first request is sent to the application, we want to make sure
 the database is up to date and automatically create and populate if not
 '''
+
+
 @app.before_first_request
 def before_first_request_func():
     # DEVELOPMENT PURPOSES
@@ -101,6 +103,7 @@ def before_first_request_func():
     ''')
     connect.commit()
     cursor.close()
+
 
 # Run our app
 if __name__ == '__main__':
