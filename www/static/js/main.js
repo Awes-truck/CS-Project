@@ -1,3 +1,4 @@
+// Modal implementation used on the Subscription page
 var modals = document.getElementsByClassName('modal');
 var btns = document.getElementsByClassName("openmodal");
 var spans = document.getElementsByClassName("close");
@@ -22,6 +23,8 @@ for(let i=0;i<spans.length;i++){
      }
  }
 
+// International country code implementation
+// Inspired by https://github.com/miguelgrinberg/flask-phone-input/blob/master/templates/index.html
  var phone_field = document.getElementById('phone');
  phone_field.style.position = 'absolute';
  phone_field.style.top = '-9999px';
