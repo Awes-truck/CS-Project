@@ -8,6 +8,8 @@ project_folder = os.path.expanduser('www')  # adjust as appropriate
 load_dotenv(os.path.join(project_folder, '.env'))
 
 # A wrapper used to check if a user is logged in
+
+
 def login_required(f):
     @wraps(f)
     def wrap(*args, **kwargs):
@@ -19,6 +21,8 @@ def login_required(f):
     return wrap
 
 # SQL Connection Function
+
+
 def sql_connect(host, port, user, password, database):
     connect = pymysql.connect(
         host=host,
@@ -30,6 +34,8 @@ def sql_connect(host, port, user, password, database):
     return connect
 
 # Create the Flask Applcation
+
+
 def create_app():
     app = Flask(__name__)
     # The app needs a secret key to work, grab it from the .env file
