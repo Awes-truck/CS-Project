@@ -3,7 +3,6 @@ from datetime import datetime
 from urllib.parse import urlparse
 from .__init__ import sql_connect, login_required
 import stripe
-import vonage
 from textmagic.rest import TextmagicRestClient
 import os
 
