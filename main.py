@@ -38,16 +38,18 @@ def before_first_request_func():
         SQL_DATABASE
     )
 
+    SQL_DATABASE = os.getenv("SQL_DATABASE")
+
     # Create a new database instance
     cursor = connect.cursor()
     # Create the database if it doesn't exist
-    cursor.execute('CREATE DATABASE IF NOT EXISTS awestruck')
+    cursor.execute(f"CREATE DATABASE IF NOT EXISTS {SQL_DATABASE}")
     # Save changes
     connect.commit()
     cursor.close()
 
     # Now we can grab the database we just created
-    connect.select_db(os.getenv("SQL_DATABASE"))
+    connect.select_db(SQL_DATABASE)
 
     cursor = connect.cursor()
     # Create usergroups table if it doesnt already exist
