@@ -86,8 +86,30 @@ def before_first_request_func():
             family_name VARCHAR(40) NOT NULL,
             dob DATE NOT NULL,
             senior_id INT(6),
+            is_developmental BIT(1) DEFAULT 0,
+            FOREIGN KEY (senior_id) REFERENCES seniors(senior_id)
+        );
+    ''')
+    cursor.close()
+    cursor = connect.cursor()
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS subscriptions(
+            subscription_id INT(6) PRIMARY KEY AUTO_INCREMENT,
+            name VARCHAR(40) NOT NULL,
+            description VARCHAR(255)
+        );
+    ''')
+    cursor.close()
+    cursor = connect.cursor()
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS orders(
+            order_id INT(6) PRIMARY KEY AUTO_INCREMENT,
+            senior_id INT(6),
+            subscription_id INT(6),
+            order_date DATETIME NOT NULL,
+            total_price DECIMAL(5, 2) NOT NULL,
             FOREIGN KEY (senior_id) REFERENCES seniors(senior_id),
-            is_developmental BIT(1) DEFAULT 0
+            FOREIGN KEY (subscription_id) REFERENCES subscriptions(subscription_id)
         );
     ''')
     cursor.close()
