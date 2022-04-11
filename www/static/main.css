@@ -82,14 +82,14 @@ a {
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  background-color: var(--black); /* Fallback color */
+  background-color: rgba(var(--black),0.4); /* Black w/ opacity */
 }
 
 .modal-header {
   padding: 2px 16px;
   background-color: var(--success);
-  color: white;
+  color: var(--white);
 }
 
 /* Modal Body */
@@ -99,7 +99,7 @@ a {
 .modal-footer {
   padding: 2px 16px;
   background-color: var(--success);
-  color: white;
+  color: var(--white);
 }
 
 /* Modal Content */
@@ -110,7 +110,7 @@ a {
   padding: 0;
   border: 1px solid #888;
   width: 50%;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  box-shadow: 0 4px 8px 0 rgba(var(--black),0.2),0 6px 20px 0 rgba(var(--black),0.19);
   animation-name: animatetop;
   animation-duration: 0.4s
 }
@@ -129,7 +129,7 @@ a {
 
 .close:hover,
 .close:focus {
-  color: black;
+  color: var(--black);
   text-decoration: none;
   cursor: pointer;
 }
@@ -226,9 +226,4 @@ a {
 #copyright {
   	text-align: center;
 	font-size: 1vw;
-}
-
-#copyright img.python-logo{
-	height: 1vw;
-	width: auto;
 }
