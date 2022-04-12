@@ -1,4 +1,5 @@
-// Autocomplete code inspired by: https://stackoverflow.com/questions/31364880/combine-street-number-and-route-in-address-autocomplete-api
+// Autocomplete code inspired by: https://stackoverflow.com/questions/31364880/
+// combine-street-number-and-route-in-address-autocomplete-api
 // Uses Google Places AutoComplete API
 var placeSearch, autocomplete;
     var componentForm = {
