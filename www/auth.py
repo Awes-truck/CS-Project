@@ -80,9 +80,12 @@ def login():
 
 @auth.route('/logout')
 def logout():
-    # Clear all session variables and redirect home
-    if 'loggedin' in session:
-        session.clear()
+    # Clear all session variables and redirect home if user is logged in
+    if 'loggedin' not in session:
+        flash("You are not logged in!", category='error')
+        return redirect(url_for('auth.login'))
+
+    session.clear()
 
     return redirect(url_for('views.home'))
 
