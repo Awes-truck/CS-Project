@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, session, url_for, request, flash, current_app as app
 from datetime import datetime
-from .__init__ import sql_connect, login_required
+from .__init__ import sql_connect
 import os
 import stripe
 from werkzeug.security import generate_password_hash, check_password_hash

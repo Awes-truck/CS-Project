@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, request, session, flash, url_for
 from datetime import datetime
 from urllib.parse import urlparse
-from .__init__ import sql_connect, login_required
+from .__init__ import sql_connect
 import stripe
 from textmagic.rest import TextmagicRestClient
 import os
