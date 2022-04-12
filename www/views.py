@@ -139,8 +139,10 @@ def subscriptions():
 
 
 @views.route('/success')
-@login_required
 def success():
+    if 'loggedin' not in session:
+        flash("You are not logged in!", category='error')
+        return redirect(url_for('auth.login'))
     # Conditions too long for one line, split them up a bit for readability
     check_session_exists = 'stripe_session' not in session
     check_id_in_args = 'session_id' not in request.args

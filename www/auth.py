@@ -79,11 +79,11 @@ def login():
 
 
 @auth.route('/logout')
-# Check that the user is logged in before proceeding using the login wrapper
-@login_required
 def logout():
     # Clear all session variables and redirect home
-    session.clear()
+    if 'loggedin' in session:
+        session.clear()
+
     return redirect(url_for('views.home'))
 
 

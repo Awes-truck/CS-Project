@@ -1,5 +1,4 @@
-from flask import Flask, redirect, url_for, session, flash
-from functools import wraps
+from flask import Flask
 import pymysql
 from dotenv import load_dotenv
 import os
@@ -7,18 +6,6 @@ import os
 project_folder = os.path.expanduser('www')  # adjust as appropriate
 load_dotenv(os.path.join(project_folder, '.env'))
 
-# A wrapper used to check if a user is logged in
-
-
-def login_required(f):
-    @wraps(f)
-    def wrap(*args, **kwargs):
-        if 'loggedin' in session:
-            return f(*args, **kwargs)
-        else:
-            flash("You are not logged in!", category='error')
-            return redirect(url_for('auth.login'))
-    return wrap
 
 # SQL Connection Function
 
