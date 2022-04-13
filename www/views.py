@@ -198,7 +198,7 @@ def success():
                 UPDATE seniors
                 SET group_id = '%s'
                 WHERE senior_id = '%s'
-            ''' % (v[0], session['id']))
+            ''' % (v[0], id))
             # Commit the change
             CONNECT.commit()
             cursor.close()
