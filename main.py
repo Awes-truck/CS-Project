@@ -3,9 +3,16 @@ from flask import request
 from urllib.parse import urlparse
 from datetime import timedelta
 import os
+from werkzeug.middleware.profiler import ProfilerMiddleware
 
 # Create a new application
 app = create_app()
+app.config['PROFILE'] = True
+app.wsgi_app = ProfilerMiddleware(
+    app.wsgi_app,
+    restrictions=[0],
+    profile_dir='D:\\GitHub\\'
+)
 
 # Set Session persistence to a specified amount of days
 app.permanent_session_lifetime = timedelta(days=7)
