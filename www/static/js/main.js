@@ -28,7 +28,6 @@ for(let i=0;i<spans.length;i++){
  var phone_field = document.getElementById('phone');
  phone_field.style.position = 'absolute';
  phone_field.style.top = '-9999px';
- phone_field.style.left = '-9999px';
  phone_field.parentElement.insertAdjacentHTML('beforeend', '<div><input type="tel" class="form-control" id="_phone"></div>');
  var intl_phone_field = document.getElementById('_phone');
  var intl_phone_iti = window.intlTelInput(intl_phone_field, {
