@@ -1,3 +1,5 @@
+// [PLAGIARISM NOTICE]
+// Inspired by: https://www.w3schools.com/howto/howto_css_modals.asp
 // Modal implementation used on the Subscription page
 var modals = document.getElementsByClassName('modal');
 var btns = document.getElementsByClassName("openmodal");
@@ -23,8 +25,9 @@ for(let i=0;i<spans.length;i++){
      }
  }
 
-// International country code implementation
+// [PLAGIARISM NOTICE]
 // Inspired by https://github.com/miguelgrinberg/flask-phone-input/blob/master/templates/index.html
+// International country code implementation
  var phone_field = document.getElementById('phone');
  phone_field.style.position = 'absolute';
  phone_field.style.top = '-9999px';
