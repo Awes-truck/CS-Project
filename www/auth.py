@@ -182,25 +182,10 @@ def register():
                 '''INSERT INTO seniors (first_name, family_name, email, password, address, phone_number, group_id)
                 VALUES ('%s', '%s', '%s', '%s', '%s', '%s', 2)'''
                 % (first_name, family_name, email, password_hash, full_address, phone_number))
-            # Get new User ID automatically assigned from the INSERT query
-            user_id = str(cursor.lastrowid)
             # Commit our new change
             CONNECT.commit()
             cursor.close()
             flash('Account successfully created!', category='success')
-            # Create a new Customer on the Stripe API
-            stripe.Customer.create(
-                description="User ID: " + user_id,
-                address={
-                    'line1': request.form.get(postal_keys[0]),
-                    'city': request.form.get(postal_keys[1]),
-                    'state': request.form.get(postal_keys[2]),
-                    'postal_code': request.form.get(postal_keys[3])
-                },
-                name=" ".join([first_name, family_name]),
-                email=email,
-                phone=phone_number
-            )
 
             return redirect(url_for('views.home'))
 
