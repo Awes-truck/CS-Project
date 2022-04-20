@@ -4,7 +4,7 @@ Run: main.py
 
 HTML Templates: www/templates
 CSS/JS/Images/Fonts: www/static
-Requirements
+Requirements (pip install)
 - flask
 - gunicorn
 - pymysql
