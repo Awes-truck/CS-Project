@@ -161,7 +161,7 @@ def success():
     price = item.data[0].price.id
     price = stripe.Price.retrieve(price).unit_amount
     # Price comes unformatted, let's fix that
-    format(price / 100, '.02f')
+    price = format(price / 100, '.02f')
 
     # We no longer need the Stripe Session, garbage collect
     session.pop('stripe_session', None)
