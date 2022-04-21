@@ -12,7 +12,6 @@ HTML Templates: www/templates
 CSS/JS/Images/Fonts: www/static
 
 ### Prerequisites
-Requirements (pip)
 ```sh
 pip install -r requirements.txt
 ```
