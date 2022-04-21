@@ -10,7 +10,7 @@ RUN: main.py
 HTML Templates: www/templates
 CSS/JS/Images/Fonts: www/static
 
-##Prerequisites
+### Prerequisites
 Requirements (pip)
 ```sh
 pip install -r requirements.txt
