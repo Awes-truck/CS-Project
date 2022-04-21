@@ -8,6 +8,7 @@ main.js:29-42 - https://github.com/miguelgrinberg/flask-phone-input/blob/master/
 RUN: main.py
 
 HTML Templates: www/templates
+
 CSS/JS/Images/Fonts: www/static
 
 ### Prerequisites
@@ -21,16 +22,16 @@ pip install -r requirements.txt
 - python-dotenv
 - textmagic
 
-.ENV file Requirements
-'SECRET_KEY' - Randomised string for FLASK secret key
-'SQL_HOST' - Database host
-'SQL_PORT' - Database port (3306 most of the time)
-'SQL_USER' - Database username
-'SQL_PASSWORD' - Database password
-'SQL_DATABASE' - Database name
-'STRIPE_API_LIVE_PK' - Stripe live private key
-'STRIPE_API_LIVE_SK' - Stripe live secret key
-'STRIPE_API_TEST_PK' - Stripe test suite private key
-'STRIPE_API_TEST_SK' - Stripe test suite secret key
-'TEXTMAGIC_USERNAME' - TextMagic username
-'TEXTMAGIC_API_KEY' - TextMagic api key
+### .ENV file Requirements
+- 'SECRET_KEY' - Randomised string for FLASK secret key
+- 'SQL_HOST' - Database host
+- 'SQL_PORT' - Database port (3306 most of the time)
+- 'SQL_USER' - Database username
+- 'SQL_PASSWORD' - Database password
+- 'SQL_DATABASE' - Database name
+- 'STRIPE_API_LIVE_PK' - Stripe live private key
+- 'STRIPE_API_LIVE_SK' - Stripe live secret key
+- 'STRIPE_API_TEST_PK' - Stripe test suite private key
+- 'STRIPE_API_TEST_SK' - Stripe test suite secret key
+- 'TEXTMAGIC_USERNAME' - TextMagic username
+- 'TEXTMAGIC_API_KEY' - TextMagic api key
