@@ -1,1 +1,1 @@
-web: gunicorn josh-project:app
+web: gunicorn app:app
