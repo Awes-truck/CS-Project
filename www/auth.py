@@ -138,7 +138,7 @@ def register():
         user to try again
         '''
         for i in postal_keys:
-            if request.form.get(i) is None:
+            if request.form.get(i) is None or request.form.get(i) == "":
                 full_address_complete = False
                 break
             else:
