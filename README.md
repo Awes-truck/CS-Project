@@ -1,4 +1,4 @@
-# CS-Project
+# WGCCC Web Payments
 
 ### [NOTICES OF PLAGIARISM]
 - autocomplete.js - https://stackoverflow.com/questions/31364880/combine-street-number-and-route-in-address-autocomplete-api
