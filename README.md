@@ -1,5 +1,10 @@
 # WGCCC Web Payments
 
+<p align="center">
+  <img src=https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue></img>
+  <img src=https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white></img>
+  <img src=https://img.shields.io/badge/MariaDB-003545?style=for-the-badge&logo=mariadb&logoColor=white></img>
+
 ### [NOTICES OF PLAGIARISM]
 - autocomplete.js - https://stackoverflow.com/questions/31364880/combine-street-number-and-route-in-address-autocomplete-api
 - main.js:4-26 - https://www.w3schools.com/howto/howto_css_modals.asp
