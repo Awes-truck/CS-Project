@@ -19,6 +19,7 @@ pip install -r requirements.txt
 ### Usage:
 ```sh
 ./main.py
+http://localhost:5000
 ```
 
 HTML Templates: www/templates
